@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- الرئيسية: حاسبة الطاقة الذكية -->
+    <url>
+        <loc>https://calc.solartoolspro.com/</loc>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <!-- دليل الاستخدام -->
+    <url>
+        <loc>https://calc.solartoolspro.com/guide.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <!-- من نحن -->
+    <url>
+        <loc>https://calc.solartoolspro.com/about.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <!-- سياسة الخصوصية -->
+    <url>
+        <loc>https://calc.solartoolspro.com/privacy.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+</urlset>
