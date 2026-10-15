@@ -953,7 +953,7 @@
 <script>
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=11').catch(err => {});
+        // ⚠️ ملاحظة للمطور: قم بتغيير الرقم بجانب كلمة update (مثل update1 إلى update2) لفرض التحديث الصامت عند الضرورة navigator.serviceWorker.register('/sw.js?v=update1').catch(err => {});
     });
 }
 
