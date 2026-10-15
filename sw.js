@@ -59,3 +59,10 @@ self.addEventListener('fetch', event => {
       })
   );
 });
+
+// استقبال أمر تخطي الانتظار من الشريط العائم لتفعيل التحديث فوراً عند النقر على "تحديث الآن"
+self.addEventListener('message', event => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});
