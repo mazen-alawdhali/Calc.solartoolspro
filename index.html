@@ -247,10 +247,10 @@
         .gold-badge-container { display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 8px 0 12px 0; font-family: inherit; }
         .shield-wrapper { position: relative; width: 50px; height: 58px; display: flex; align-items: center; justify-content: center; }
         .shield-icon { width: 100%; height: 100%; filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.35)); }
-        .gold-edition-label { margin-top: 4px; font-size: 12px; font-weight: bold; color: #FFE259; background: linear-gradient(135deg, #FFE259 0%, #FFA751 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 8px rgba(255, 215, 0, 0.2); }
+        .gold-edition-label { margin-top: 4px; font-size: 12px; font-weight: bold; color: #FFE259; background: linear-gradient(135deg, #FFE259 0%, #FFA751 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 8px rgba(255, 215, 0, 0.2); }
         
-        .visitor-counter-box { margin-top: 15px; font-size: 13px; color: #94a3b8; text-align: center; }
-        .visitor-count-text { font-weight: bold; color: #10b981; }
+        .visitor-counter-box { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(16, 185, 129, 0.25); padding: 8px 16px; border-radius: 14px; backdrop-filter: blur(6px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); font-size: 13px; color: #94a3b8; font-weight: 600; margin-top: 15px; }
+        .visitor-count-text { font-weight: bold; color: #10b981; font-family: Consolas, 'Courier New', monospace; letter-spacing: 1px; }
 
         .pdf-accordion { border: 1px solid #2563eb; border-radius: 16px; margin: 20px auto 16px auto; width: calc(100% - 32px); background-color: rgba(37, 99, 235, 0.05); overflow: hidden; transition: all 0.3s ease; scroll-margin-top: 24px; }
         .pdf-accordion-header { padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: #38bdf8; font-weight: 700; font-size: 15px; user-select: none; }
@@ -880,8 +880,8 @@
                     </div>
 
                     <footer class="solar-footer">
-                        <p class="copyright-text" data-i18n="copyright">جميع الحقوق محفوظة لـ <span class="author-name">حاسبة الطاقة الشمسية الذكية</span> &copy; 2026</p>
-                        <p class="tagline" data-i18n="tagline">تطبيق حاسبة الطاقة الشمسية الذكية</p>
+                        <p class="copyright-text" data-i18n="copyright">جميع الحقوق محفوظة &copy; 2026 لـ<br><span class="author-name">حاسبة الطاقة الشمسية الذكية</span></p>
+                        <p class="tagline" data-i18n="tagline" style="display: none;"></p>
 
                         <div class="gold-badge-container">
                           <div class="shield-wrapper">
@@ -914,7 +914,7 @@
                         
                         <div id="visitor-counter-box" class="visitor-counter-box">
                             <span data-i18n="visitorCountText">عدد زيارات الحاسبة: </span>
-                            <span id="visitor-count" class="visitor-count-text" dir="ltr">...</span>
+                            <span id="visitor-count" class="visitor-count-text">...</span>
                         </div>
 
                         <div class="social-links">
@@ -953,7 +953,7 @@
 <script>
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        // ⚠️ ملاحظة للمطور: قم بتغيير الرقم بجانب كلمة update (مثل update1 إلى update2) لفرض التحديث الصامت عند الضرورة navigator.serviceWorker.register('/sw.js?v=update1').catch(err => {});
+        if ('serviceWorker' in navigator) {     window.addEventListener('load', () => {         navigator.serviceWorker.register('/sw.js?v=update3').catch(err => {});     }); }
     });
 }
 
@@ -1069,7 +1069,7 @@ if ('serviceWorker' in navigator) {
             disclaimerNote: "💡 <strong>تنبيه هام:</strong> تعتبر مخرجات هذه الحاسبة نموذج محاكاة تقديري هندسي للمساعدة في التخطيط الأولي للمنظومة الشمسية. للحصول على أداء ميداني مضمون ولتراعي ظروف الموقع الفعلية وجودة التركيب، يُنصح دائماً بمراجعة التقييم النهائي مع مهندس أو فني طاقة شمسية مختص.",
 
             resetData: "⚠️ تصفير البيانات",
-            copyright: 'جميع الحقوق محفوظة لـ <span class="author-name">حاسبة الطاقة الشمسية الذكية</span> &copy; 2026',
+            copyright: 'جميع الحقوق محفوظة &copy; 2026 لـ<br><span class="author-name">حاسبة الطاقة الشمسية الذكية</span>',
             tagline: 'تطبيق حاسبة الطاقة الشمسية الذكية',
             goldEdition: 'الإصدار الذهبي',
             devNamePh: "اسم الجهاز", delBtn: "حذف", syncCb: "تزامن",
@@ -1168,7 +1168,7 @@ if ('serviceWorker' in navigator) {
             disclaimerNote: "💡 <strong>Important Note:</strong> The output of this calculator is an estimated engineering simulation model for initial planning. For guaranteed field performance and to account for site-specific installation conditions, always review the final design with a qualified solar technician.",
 
             resetData: "⚠️ Reset All Data",
-            copyright: 'All Rights Reserved - <span class="author-name">Smart Solar Calculator</span> &copy; 2026',
+            copyright: 'All Rights Reserved &copy; 2026 for<br><span class="author-name">Smart Solar Calculator</span>',
             tagline: 'Smart Solar Calculator App',
             goldEdition: 'Gold Edition',
             devNamePh: "Appliance Name", delBtn: "Delete", syncCb: "Sync",
