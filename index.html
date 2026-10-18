@@ -871,7 +871,7 @@
 
                     <button class="btn btn-reset" onclick="resetToDefault()" data-i18n="resetData">⚠️ تصفير البيانات</button>
 
-                    <div class="service-apps-card" style="margin: 20px auto 16px auto; width: calc(100% - 32px); background-color: rgba(15, 23, 42, 0.4); border: 1px solid #334155; border-radius: 16px; padding: 16px;">
+                    <div class="playstore-card" style="margin: 20px auto 16px auto; width: calc(100% - 32px); background-color: rgba(15, 23, 42, 0.4); border: 1px solid #10b981; border-radius: 16px; padding: 16px; text-align: center;"><div style="font-size: 14px; font-weight: 700; color: #34d399; margin-bottom: 10px;" data-i18n="playStoreTitle">📲 حمّل الحاسبة الآن من متجر جوجل بلاي</div><a href="https://play.google.com/store/apps/details?id=com.mazen.Smart.Solar.Energy.Calc" target="_blank" rel="noopener noreferrer" style="display: inline-block;"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" style="height: 42px; width: auto; vertical-align: middle;"></a></div><div class="service-apps-card" style="margin: 20px auto 16px auto; width: calc(100% - 32px); background-color: rgba(15, 23, 42, 0.4); border: 1px solid #334155; border-radius: 16px; padding: 16px;">
                         <div style="font-size: 14.5px; font-weight: 700; color: #10b981; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;" data-i18n="serviceAppsTitle">🛠️ تطبيقات خدمية</div>
                         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                             <a href="https://panels.solartoolspro.com" onclick="this.href='https://panels.solartoolspro.com?lang='+(localStorage.getItem('solar_app_lang')||'ar')" target="_blank" class="btn" style="flex: 1; font-size: 13.5px; padding: 12px; text-decoration: none; background: rgba(37, 99, 235, 0.1); border: 1px solid #2563eb; color: #60a5fa; min-width: 130px;" id="pnlNavBtn" data-i18n="pnlNavBtn">☀️ حاسبة الألواح</a>
@@ -1012,7 +1012,7 @@ if ('serviceWorker' in navigator) {
     const dict = {
         ar: {
             appTitle: "حاسبة الطاقة الشمسية الذكية", appSubtitle: "إصدار احترافي متكامل",
-            pnlNavBtn: "☀️ حاسبة الألواح", battNavBtn: "🔋 حاسبة البطارية",
+            pnlNavBtn: "☀️ حاسبة الألواح", battNavBtn: "🔋 حاسبة البطارية", playStoreTitle: "📲 حمّل الحاسبة الآن من متجر جوجل بلاي",
             serviceAppsTitle: "🛠️ تطبيقات خدمية",
             sysSettings: "⚡ إعدادات المنظومة الهندسية:", sysVoltage: "جهد النظام (Volt):",
             volt12: "12 فولت", volt24: "24 فولت", volt48: "48 فولت",
@@ -1111,7 +1111,7 @@ if ('serviceWorker' in navigator) {
         },
         en: {
             appTitle: "Smart Solar Calculator", appSubtitle: "Professional Integrated Edition",
-            pnlNavBtn: "☀️ Panels Calc", battNavBtn: "🔋 Battery Calc",
+            pnlNavBtn: "☀️ Panels Calc", battNavBtn: "🔋 Battery Calc", playStoreTitle: "📲 Download the App Now from Google Play",
             serviceAppsTitle: "🛠️ Service Apps",
             sysSettings: "⚡ System Engineering Settings:", sysVoltage: "System Voltage (Volt):",
             volt12: "12 Volts", volt24: "24 Volts", volt48: "48 Volts",
