@@ -913,7 +913,7 @@
                         </div>
                         
                         <div id="visitor-counter-box" class="visitor-counter-box">
-                            <span data-i18n="visitorCountText">عدد زيارات الحاسبة: </span>
+                            <span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span> <span data-i18n="visitorCountText">عدد زيارات الحاسبة: </span>
                             <span id="visitor-count" class="visitor-count-text">...</span>
                         </div>
 
@@ -1307,7 +1307,7 @@ if ('serviceWorker' in navigator) {
     window.applyLanguage = function() {
         const t = dict[window.currentLang];
         document.documentElement.lang = window.currentLang;
-        document.documentElement.dir = window.currentLang === 'ar' ? 'rtl' : 'ltr';
+        document.documentElement.dir = window.currentLang === 'ar' ? 'rtl' : 'ltr'; document.querySelectorAll('.visitor-counter-box svg').forEach(s => s.style.transform = window.currentLang === 'ar' ? 'scaleX(-1)' : 'scaleX(1)');
         const globeSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>';
         if(document.getElementById('langBtn')) document.getElementById('langBtn').innerHTML = window.currentLang === 'ar' ? 'EN ' + globeSvg : 'AR ' + globeSvg;
         
@@ -2428,7 +2428,7 @@ if ('serviceWorker' in navigator) {
 
                 let enterpriseAlerts = "";
                 if (mpptCurrent > 300 && entSysType !== "hv") {
-                    enterpriseAlerts += `<div class="engineering-alert" style="margin-top: 12px; font-size: 12.5px; direction: rtl;">${t.hvWarning}</div>`;
+                    enterpriseAlerts += `<div class="engineering-alert" style="margin-top: 12px; font-size: 12.5px; direction: ${window.currentLang === 'en' ? 'ltr' : 'rtl'}; text-align: ${window.currentLang === 'en' ? 'left' : 'right'};">${t.hvWarning}</div>`;
                 }
 
                 let dcAcRatio = totalPanelPower / (finalInv > 0 ? finalInv : 1);
