@@ -262,7 +262,7 @@
 
         .print-only-header { display: none; }
 
-        @media print {
+        @media screen and (max-width: 360px) { label { font-size: 10.5px; } } @media print {
             @page { size: A4 portrait; margin: 10mm 15mm 15mm 15mm; }
             body, html { display: block !important; background-color: white !important; color: #000000 !important; padding: 0 !important; margin: 0 !important; height: auto !important; overflow: visible !important; font-size: 12pt !important; }
             .main-table { width: 100% !important; max-width: 100% !important; border: none !important; margin: 0 !important; display: table !important; }
@@ -278,7 +278,7 @@
             .print-client-box { background-color: #f8fafc !important; border: 1px solid #cbd5e1 !important; padding: 8px 10px !important; border-radius: 8px; margin-top: 8px !important; font-size: 12pt !important; display: flex; gap: 8px; color: #000000 !important; }
             .print-client-name { color: #2563eb !important; font-weight: bold; }
 
-            .header, .pdf-accordion, .service-apps-card, button, .btn, .btn-add, .social-links, .solar-footer, .lang-toggle, .top-links, .gold-badge-container, .visitor-counter-box { display: none !important; }
+            .header, .pdf-accordion, .playstore-card, .service-apps-card, button, .btn, .btn-add, .social-links, .solar-footer, .lang-toggle, .top-links, .gold-badge-container, .visitor-counter-box { display: none !important; }
             
             .section { padding: 10px 0 !important; border-bottom: none !important; }
             
