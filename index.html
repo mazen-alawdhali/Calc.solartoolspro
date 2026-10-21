@@ -262,7 +262,7 @@
 
         .print-only-header { display: none; }
 
-        @media screen and (max-width: 360px) { label { font-size: 10.5px; } } @media print {
+        @media screen and (max-width: 360px) { label { font-size: 9.5px; letter-spacing: -0.2px; } .input-group label { display: flex; align-items: center; gap: 2px; } } @media print {
             @page { size: A4 portrait; margin: 10mm 15mm 15mm 15mm; }
             body, html { display: block !important; background-color: white !important; color: #000000 !important; padding: 0 !important; margin: 0 !important; height: auto !important; overflow: visible !important; font-size: 12pt !important; }
             .main-table { width: 100% !important; max-width: 100% !important; border: none !important; margin: 0 !important; display: table !important; }
