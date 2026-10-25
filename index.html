@@ -1004,7 +1004,7 @@ if ('serviceWorker' in navigator) {
             } else if (val >= 10 && val < 50) {
                 val = 100 - val;
             }
-            input.value = `DoD ${val}%`;
+            input.value = `${val}%`;
             saveDataAndCalculate();
         }
     };
@@ -1523,9 +1523,9 @@ if ('serviceWorker' in navigator) {
                         } else if (numVal >= 10 && numVal < 50) {
                             numVal = 100 - numVal;
                         }
-                        val = `DoD ${numVal}%`;
+                        val = `${numVal}%`;
                     } else {
-                        val = "DoD 80%";
+                        val = "80%";
                     }
                 }
                 if(el && val) el.value = val; 
