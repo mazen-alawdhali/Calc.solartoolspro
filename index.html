@@ -534,7 +534,7 @@
             box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
         }
 
-        .modal-btn-ok:hover {
+        .update-floating-card { position: fixed; bottom: 20px; right: 20px; left: 20px; max-width: 400px; margin: 0 auto; background: #1e293b; border: 1.5px solid #10b981; border-radius: 20px; padding: 16px; z-index: 10000; box-shadow: 0 15px 35px rgba(0,0,0,0.6); display: flex; flex-direction: column; gap: 12px; transform: translateY(120px); opacity: 0; visibility: hidden; transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); direction: rtl; } [dir="ltr"] .update-floating-card { direction: ltr; } .update-floating-card.active { transform: translateY(0); opacity: 1; visibility: visible; } .update-header-row { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; } .update-app-icon { width: 52px; height: 52px; border-radius: 14px; background: #000000; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); flex-shrink: 0; overflow: hidden; border: 1px solid #334155; } .update-app-icon img { width: 100%; height: 100%; object-fit: cover; } .update-store-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: #38bdf8; font-weight: 700; background: rgba(56, 189, 248, 0.1); padding: 3px 8px; border-radius: 6px; margin-bottom: 4px; } .update-store-badge svg { width: 12px; height: 12px; fill: currentColor; } .update-modal-box h3 { margin: 0 0 6px; color: #f8fafc; font-size: 16.5px; font-weight: 700; text-align: right; } [dir="ltr"] .update-modal-box h3 { text-align: left; } .update-modal-box p { margin: 0 0 20px; color: #94a3b8; font-size: 13px; line-height: 1.5; text-align: right; } [dir="ltr"] .update-modal-box p { text-align: left; } .update-modal-actions { display: flex; gap: 10px; align-items: stretch; width: 100%; flex-direction: row; direction: inherit; } .btn-update-later { background: #334155; color: #f8fafc; flex: 1; height: 44px; border-radius: 10px; font-weight: 700; font-size: 13.5px; cursor: pointer; border: 1px solid #475569; transition: 0.2s; font-family: inherit; display: flex; align-items: center; justify-content: center; } .btn-update-later:hover { background: #475569; } .gplay-badge-btn { background-color: #000000; border: 1px solid #475569; border-radius: 10px; height: 44px; padding: 0 10px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; text-decoration: none; transition: all 0.2s ease; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); flex: 1; } .gplay-badge-btn:hover { border-color: #94a3b8; background-color: #111827; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6); transform: scale(1.02); } .gplay-icon { width: 20px; height: 20px; flex-shrink: 0; } .gplay-text-group { display: flex; flex-direction: column; text-align: left; line-height: 1.1; } .gplay-subtext { font-size: 8px; color: #94a3b8; font-family: Arial, sans-serif; font-weight: 600; letter-spacing: 0.3px; text-transform: uppercase; } .gplay-maintext { font-size: 12.5px; color: #ffffff; font-family: Arial, sans-serif; font-weight: 700; letter-spacing: -0.2px; } .modal-btn-ok:hover {
             background-color: #047857;
         }
     </style>
@@ -871,7 +871,7 @@
 
                     <button class="btn btn-reset" onclick="resetToDefault()" data-i18n="resetData">⚠️ تصفير البيانات</button>
 
-                    <div class="playstore-card" style="margin: 20px auto 16px auto; width: calc(100% - 32px); background-color: rgba(15, 23, 42, 0.4); border: 1px solid #10b981; border-radius: 16px; padding: 16px; text-align: center;"><div style="font-size: 14px; font-weight: 700; color: #34d399; margin-bottom: 10px;" data-i18n="playStoreTitle">📲 حمّل الحاسبة الآن من متجر جوجل بلاي</div><a href="https://play.google.com/store/apps/details?id=com.mazen.Smart.Solar.Energy.Calc" target="_blank" rel="noopener noreferrer" style="display: inline-block;"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" style="height: 42px; width: auto; vertical-align: middle;"></a></div><div class="service-apps-card" style="margin: 20px auto 16px auto; width: calc(100% - 32px); background-color: rgba(15, 23, 42, 0.4); border: 1px solid #334155; border-radius: 16px; padding: 16px;">
+                    <div class="playstore-card" style="margin: 20px auto 16px auto; width: calc(100% - 32px); background-color: rgba(15, 23, 42, 0.4); border: 1px solid #10b981; border-radius: 16px; padding: 16px; text-align: center;"><div style="font-size: 14px; font-weight: 700; color: #34d399; margin-bottom: 10px;" data-i18n="playStoreTitle">📲 حمّل الحاسبة الآن من متجر جوجل بلاي</div><a href="https://play.google.com/store/apps/details?id=com.mazen.Smart.Solar.Energy.Calc" target="_blank" rel="noopener noreferrer" class="gplay-badge-btn" style="display: inline-flex;"><svg class="gplay-icon" viewBox="0 0 512 512"><path fill="#EA4335" d="M325.3 234.3L104.2 11.6c-4.2-4.2-11.1-4.2-15.3 0-2.1 2.1-3.3 5-3.3 8v303.4c0 3 1.2 5.9 3.3 8 4.2 4.2 11.1 4.2 15.3 0l221.1-222.7c4.2-4.1 4.2-10.9 0-14z"/><path fill="#FBBC04" d="M381.8 290.8l-56.5-56.5L104.2 456.4c2.1 2.1 5 3.3 8 3.3h303.4c3 0 5.9-1.2 8-3.3-4.2-4.1-33.8-33.7-41.8-41.6z"/><path fill="#34A853" d="M389.8 214.2L325.3 234.3l-56.5 56.5 56.5 56.5 64.5 20.1c7.3 2.3 15.1-.2 20.2-5.7 8.3-9 8.3-22.9 0-31.9l-20.2-20.1z"/><path fill="#4285F4" d="M88.6 11.6c-2.1 2.1-3.3 5-3.3 8v303.4c0 3 1.2 5.9 3.3 8l221.1-222.7L88.6 11.6z"/></svg><div class="gplay-text-group"><span class="gplay-subtext" data-i18n="gplaySub">احصل عليه من</span><span class="gplay-maintext" data-i18n="gplayMain">Google Play</span></div></a></div><div class="service-apps-card" style="margin: 20px auto 16px auto; width: calc(100% - 32px); background-color: rgba(15, 23, 42, 0.4); border: 1px solid #334155; border-radius: 16px; padding: 16px;">
                         <div style="font-size: 14.5px; font-weight: 700; color: #10b981; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;" data-i18n="serviceAppsTitle">🛠️ تطبيقات خدمية</div>
                         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                             <a href="https://panels.solartoolspro.com" onclick="this.href='https://panels.solartoolspro.com?lang='+(localStorage.getItem('solar_app_lang')||'ar')" target="_blank" class="btn" style="flex: 1; font-size: 13.5px; padding: 12px; text-decoration: none; background: rgba(37, 99, 235, 0.1); border: 1px solid #2563eb; color: #60a5fa; min-width: 130px;" id="pnlNavBtn" data-i18n="pnlNavBtn">☀️ حاسبة الألواح</a>
@@ -937,7 +937,7 @@
     </tfoot>
 </table>
 
-<div class="modal-overlay" id="customModal">
+<div class="update-floating-card" id="updateModal"><div class="update-header-row"><div class="update-app-icon"><img src="favicon-96x96.png" alt="App Icon"></div><div><div class="update-store-badge"><svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a1.35 1.35 0 0 1-.61-1.127V2.941c0-.46.222-.89.61-1.127zM15.208 13.416l2.122 2.122-10.428 6.02a1.35 1.35 0 0 1-1.35-.001l9.656-8.141zM17.33 11.294l2.122 2.122-9.656 8.141-2.122-2.122 9.656-8.141zM15.208 10.584L5.552 2.443a1.35 1.35 0 0 1 1.35-.001l10.428 6.02-2.122 2.122z"/></svg>Google Play</div><h3 data-i18n="updateTitle">تحديث جديد متوفر</h3></div></div><p data-i18n="updateDesc">يتوفر إصدار جديد من التطبيق لتحسين الأداء والمميزات. هل تريد تحديثه الآن؟</p><div class="update-modal-actions"><button class="btn-update-later" onclick="closeUpdateModal()" data-i18n="updateLater">لاحقاً</button><a href="https://play.google.com/store/apps/details?id=com.mazen.Smart.Solar.Energy.Calc" target="_blank" rel="noopener noreferrer" class="gplay-badge-btn" onclick="openUpdateStore()"><svg class="gplay-icon" viewBox="0 0 512 512"><path fill="#EA4335" d="M325.3 234.3L104.2 11.6c-4.2-4.2-11.1-4.2-15.3 0-2.1 2.1-3.3 5-3.3 8v303.4c0 3 1.2 5.9 3.3 8 4.2 4.2 11.1 4.2 15.3 0l221.1-222.7c4.2-4.1 4.2-10.9 0-14z"/><path fill="#FBBC04" d="M381.8 290.8l-56.5-56.5L104.2 456.4c2.1 2.1 5 3.3 8 3.3h303.4c3 0 5.9-1.2 8-3.3-4.2-4.1-33.8-33.7-41.8-41.6z"/><path fill="#34A853" d="M389.8 214.2L325.3 234.3l-56.5 56.5 56.5 56.5 64.5 20.1c7.3 2.3 15.1-.2 20.2-5.7 8.3-9 8.3-22.9 0-31.9l-20.2-20.1z"/><path fill="#4285F4" d="M88.6 11.6c-2.1 2.1-3.3 5-3.3 8v303.4c0 3 1.2 5.9 3.3 8l221.1-222.7L88.6 11.6z"/></svg><div class="gplay-text-group"><span class="gplay-subtext" data-i18n="gplaySub">احصل عليه من</span><span class="gplay-maintext" data-i18n="gplayMain">Google Play</span></div></a></div></div></div><div class="modal-overlay" id="customModal">
     <div class="modal-container">
         <div class="modal-icon" id="modalIcon">⚠️</div>
         <div class="modal-title" id="modalTitle">تأكيد تصفير البيانات</div>
@@ -1099,7 +1099,7 @@ if ('serviceWorker' in navigator) {
             engNamePh: "مثال: م. أحمد أو مؤسسة الأفق", clientNamePh: "أدخل اسم العميل أو المشروع",
             reportFooterText: "تم إنشاء هذا التقرير آلياً بواسطة حاسبة الطاقة الشمسية الذكية",
             visitorCountText: "عدد زيارات الحاسبة: ", visitorCountOffline: "غير متصل", visitorCountError: "غير متاح",
-            hoursAlertTitle: "تنبيه إدخال غير صالح", hoursAlertMsg: "مجموع ساعات العمل خلال اليوم لا يمكن أن يتجاوز 24 ساعة. يرجى إدخال ساعات فعلية صحيحة.", okBtn: "موافق", privacyPolicy: "سياسة الخصوصية", userGuide: "📖 دليل المستخدم",
+            hoursAlertTitle: "تنبيه إدخال غير صالح", hoursAlertMsg: "مجموع ساعات العمل خلال اليوم لا يمكن أن يتجاوز 24 ساعة. يرجى إدخال ساعات فعلية صحيحة.", okBtn: "موافق", privacyPolicy: "سياسة الخصوصية", userGuide: "📖 دليل المستخدم", gplaySub: "احصل عليه من", gplayMain: "Google Play",
             
             copperBusbars: "قضبان نحاسية",
             combinerNet: "صندوق تجميع (Combiner)",
@@ -1198,7 +1198,7 @@ if ('serviceWorker' in navigator) {
             engNamePh: "e.g., Eng. John or Skyline Co.", clientNamePh: "Enter client or project name",
             reportFooterText: "Report generated automatically by Smart Solar Calculator",
             visitorCountText: "Calculator Visits: ", visitorCountOffline: "Offline", visitorCountError: "Unavailable",
-            hoursAlertTitle: "Invalid Input Alert", hoursAlertMsg: "Total daily operating hours cannot exceed 24. Please enter valid hours.", okBtn: "OK", privacyPolicy: "Privacy Policy", userGuide: "📖 User Guide",
+            hoursAlertTitle: "Invalid Input Alert", hoursAlertMsg: "Total daily operating hours cannot exceed 24. Please enter valid hours.", okBtn: "OK", privacyPolicy: "Privacy Policy", userGuide: "📖 User Guide", updateTitle: "New Update Available", updateDesc: "A new version of the app is available with performance improvements. Would you like to update?", updateLater: "Later", gplaySub: "GET IT ON", gplayMain: "Google Play",
             
             copperBusbars: "Copper Busbars",
             combinerNet: "Combiner Net",
@@ -1613,7 +1613,7 @@ if ('serviceWorker' in navigator) {
         
         updateAccordionStates();
         applyLanguage();
-        window.updateVisitorCount();
+        window.updateVisitorCount(); checkAppVersion();
     };
 
     window.renderAppliances = function() {
@@ -2626,7 +2626,7 @@ if ('serviceWorker' in navigator) {
         applyLanguage(); 
     };
     
-    window.onload = window.startApp;
+    window.onload = window.startApp; const urlParams = new URLSearchParams(window.location.search); const CURRENT_VERSION_CODE = parseInt(urlParams.get('apk_ver')) || 999; let globalUpdateUrl = "https://play.google.com/store/apps/details?id=com.mazen.Smart.Solar.Energy.Calc"; let currentRemoteVersion = 1; async function checkAppVersion() { try { const response = await fetch('version.json?' + new Date().getTime()); if (!response.ok) return; const data = await response.json(); if (data.versionCode && data.versionCode > CURRENT_VERSION_CODE) { currentRemoteVersion = data.versionCode; if (data.updateUrl) globalUpdateUrl = data.updateUrl; document.getElementById('updateModal').classList.add('active'); } } catch (e) { console.log("Version check skipped."); } } window.closeUpdateModal = function() { document.getElementById('updateModal').classList.remove('active'); }; window.openUpdateStore = function() { document.getElementById('updateModal').classList.remove('active'); let marketUrl = globalUpdateUrl.startsWith("http") ? globalUpdateUrl.replace("https://play.google.com/store/apps/details?id=", "market://details?id=") : globalUpdateUrl; window.location.href = marketUrl; };
 }();
 </script>
   <script>
