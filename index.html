@@ -2476,7 +2476,7 @@ if ('serviceWorker' in navigator) {
                 const resAcCableEl = document.getElementById("resAcCable");
 
                 let bAmpsCalc = (finalInv / sysVolt) * climateFactor;
-                let maxBattAmps = Math.min(bAmpsCalc, 500);
+                let maxBattAmps = Math.min(Math.max(bAmpsCalc, (mpptCurrent * climateFactor)), 500);
 
                 let battCableSize = getCableSizeWithVoltageDrop(maxBattAmps, battDistance > 0 ? battDistance : 2, sysVolt);
                 let battBreaker = getStandardBreakerSize(maxBattAmps);
@@ -2501,7 +2501,7 @@ if ('serviceWorker' in navigator) {
                 let aAmpsCalc = (finalInv / 220) * climateFactor;
                 let acCableSize = getCableSizeWithVoltageDrop(aAmpsCalc, acDistance > 0 ? acDistance : 5, 220);
 
-                let acMarketBreakers = [32, 45, 63, 80, 100, 125, 160, 200, 250, 300];
+                let acMarketBreakers = [16, 20, 25, 32, 40, 50, 63, 80, 100, 125, 160, 200, 250, 300];
                 let acBreaker = acMarketBreakers.find(b => b >= aAmpsCalc) || 300;
                 
                 let acCableFormatted = `<span dir="ltr">${acCableSize} mm&sup2;</span>`;
