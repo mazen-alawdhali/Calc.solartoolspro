@@ -5,7 +5,7 @@
   "description": "تطبيق حاسبة الطاقة الشمسية الذكية لحساب الأحمال والبطاريات والألواح الشمسية بدقة عالية.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0f172a",
+  "background_color": "#1D2943",
   "theme_color": "#0f172a",
   "icons": [
     {
