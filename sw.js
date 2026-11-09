@@ -1,4 +1,4 @@
-const CACHE_NAME = 'solar-calc-v8-cache'; // تم تغيير الإصدار لـ v8 لإجبار المتصفح على التحديث
+const CACHE_NAME = 'solar-calc-v15-cache'; // تم تغيير الإصدار لـ v15 لإجبار المتصفح على التحديث
 const urlsToCache = [
   '/',
   '/index.html',
@@ -55,7 +55,7 @@ self.addEventListener('fetch', event => {
       })
       .catch(() => {
         // في حال انقطاع الإنترنت، قم بجلب النسخة من الكاش الموثوق
-        return caches.match(event.request);
+        return caches.match(event.request, { ignoreSearch: true });
       })
   );
 });
