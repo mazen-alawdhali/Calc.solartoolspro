@@ -953,7 +953,7 @@
 <script>
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=update15').catch(err => {});
+        navigator.serviceWorker.register('/sw.js?v=update16').catch(err => {});
     });
 }
 
@@ -1486,7 +1486,7 @@ if ('serviceWorker' in navigator) {
             
             if (!finalResponse.ok) throw new Error('Server error');
             
-            const data = await finalResponse.json(); clearTimeout(timeoutId); clearTimeout(timeoutId);
+            const data = await finalResponse.json(); clearTimeout(timeoutId);
 
             localStorage.setItem('solar_pending_visits', '0');
 

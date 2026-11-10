@@ -1,4 +1,6 @@
-const CACHE_NAME = 'solar-calc-v15-cache'; // تم تغيير الإصدار لـ v15 لإجبار المتصفح على التحديث
+const CACHE_NAME = 'solar-calc-v16-cache';
+const NETWORK_TIMEOUT_MS = 3000;
+
 const urlsToCache = [
   '/',
   '/index.html',
@@ -7,19 +9,17 @@ const urlsToCache = [
   '/favicon.svg',
   '/favicon-96x96.png',
   '/apple-touch-icon.png',
-  '/web-app-manifest-192x192.png', // تمت إضافتها من المجلد لتعمل أوفلاين
-  '/web-app-manifest-512x512.png'  // تمت إضافتها من المجلد لتعمل أوفلاين
+  '/web-app-manifest-192x192.png',
+  '/web-app-manifest-512x512.png'
 ];
 
 // تنصيب التطبيق وتخزين الملفات في ذاكرة الجوال
 self.addEventListener('install', event => {
-  self.skipWaiting(); // إجبار المتصفح على تفعيل النسخة الجديدة فوراً دون انتظار
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        console.log('تم حفظ الملفات للعمل أوفلاين بنجاح');
-        return cache.addAll(urlsToCache);
-      })
+    caches.open(CACHE_NAME).then(cache => {
+      console.log('تم حفظ الملفات للعمل أوفلاين بنجاح');
+      return cache.addAll(urlsToCache);
+    }).then(() => self.skipWaiting()) // إجبار المتصفح على تفعيل النسخة الجديدة فوراً دون انتظار
   );
 });
 
@@ -39,25 +39,60 @@ self.addEventListener('activate', event => {
   );
 });
 
-// اعتراض الطلبات: استراتيجية "الإنترنت أولاً ثم الكاش" (Network First)
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    fetch(event.request)
-      .then(response => {
-        // إذا كان هناك اتصال بالإنترنت، قم بتحديث الكاش بالنسخة الأحدث لضمان استمرار التحديثات
-        if (response && response.status === 200 && response.type === 'basic') {
-          const responseToCache = response.clone();
-          caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, responseToCache);
-          });
-        }
-        return response;
-      })
-      .catch(() => {
-        // في حال انقطاع الإنترنت، قم بجلب النسخة من الكاش الموثوق
-        return caches.match(event.request, { ignoreSearch: true });
-      })
-  );
+// استراتيجية Network-First مع مهلة 3 ثوانٍ والرجوع للكاش عند التأخير أو الأوفلاين
+self.addEventListener('fetch', (event) => {
+    // تتجاهل الطلبات الخارجية مثل APIs أو روابط تحليلات الزيارات
+    if (event.request.method !== 'GET' || !event.request.url.startsWith(self.location.origin)) {
+        return;
+    }
+
+    event.respondWith(
+        new Promise((resolve) => {
+            let isTimedOut = false;
+
+            // مؤقت المهلة (3 ثوانٍ)
+            const timeoutId = setTimeout(() => {
+                isTimedOut = true;
+                caches.match(event.request).then((cachedResponse) => {
+                    if (cachedResponse) {
+                        resolve(cachedResponse);
+                    }
+                });
+            }, NETWORK_TIMEOUT_MS);
+
+            // محاولة الجلب من الشبكة أولاً
+            fetch(event.request).then((networkResponse) => {
+                clearTimeout(timeoutId);
+
+                // إذا نجح الاتصال وكانت الاستجابة سليمة، نحدث الكاش ونرجع الملف الجديد
+                if (networkResponse && networkResponse.status === 200) {
+                    const responseToCache = networkResponse.clone();
+                    caches.open(CACHE_NAME).then((cache) => {
+                        cache.put(event.request, responseToCache);
+                    });
+
+                    if (!isTimedOut) {
+                        resolve(networkResponse);
+                    }
+                } else {
+                    // إذا أرجع السيرفر خطأ، نرجع النسخة المحفوظة من الكاش
+                    if (!isTimedOut) {
+                        caches.match(event.request).then((cachedResponse) => {
+                            resolve(cachedResponse || networkResponse);
+                        });
+                    }
+                }
+            }).catch(() => {
+                // في حالة انقطاع الشبكة (الأوفلاين) قبل انقضاء المهلة
+                clearTimeout(timeoutId);
+                if (!isTimedOut) {
+                    caches.match(event.request).then((cachedResponse) => {
+                        resolve(cachedResponse || new Response('Offline', { status: 503, statusText: 'Service Unavailable' }));
+                    });
+                }
+            });
+        })
+    );
 });
 
 // استقبال أمر تخطي الانتظار من الشريط العائم لتفعيل التحديث فوراً عند النقر على "تحديث الآن"
