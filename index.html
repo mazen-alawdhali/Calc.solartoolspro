@@ -953,7 +953,7 @@
 <script>
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=update16').catch(err => {});
+        navigator.serviceWorker.register('/sw.js?v=update17').catch(err => {});
     });
 }
 
@@ -1473,26 +1473,26 @@ if ('serviceWorker' in navigator) {
             return;
         }
 
-        const totalIncrement = 1 + pendingVisits; const controller = new AbortController(); const timeoutId = setTimeout(() => controller.abort(), 3000);
+        const totalIncrement = 1 + pendingVisits;
 
         try {
             const response = await fetch('https://solar-calculator-pro.vercel.app/api/counter', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ increment: totalIncrement }), signal: controller.signal
+                body: JSON.stringify({ increment: totalIncrement })
             });
 
-            const finalResponse = response.ok ? response : await fetch(`https://solar-calculator-pro.vercel.app/api/counter?inc=${totalIncrement}`, { signal: controller.signal });
+            const finalResponse = response.ok ? response : await fetch(`https://solar-calculator-pro.vercel.app/api/counter?inc=${totalIncrement}`);
             
             if (!finalResponse.ok) throw new Error('Server error');
             
-            const data = await finalResponse.json(); clearTimeout(timeoutId);
+            const data = await finalResponse.json();
 
             localStorage.setItem('solar_pending_visits', '0');
 
             counterElement.textContent = Number(data.count).toLocaleString('en-US');
             counterElement.style.color = '#10b981'; 
-        } catch (error) { clearTimeout(timeoutId);
+        } catch (error) {
             localStorage.setItem('solar_pending_visits', (pendingVisits + 1).toString());
             counterElement.textContent = t.visitorCountError;
             counterElement.style.color = '#ef4444'; 
