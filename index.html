@@ -122,9 +122,9 @@
 
         .btn { width: 100%; padding: 14px; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; border: none; display: flex; justify-content: center; align-items: center; gap: 8px; transition: background 0.2s, transform 0.1s; }
         .btn:active { transform: scale(0.98); }
-        .btn-add { background-color: #059669; color: white; margin-top: 8px; box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2); }
+        .btn-add { background: linear-gradient(135deg, rgba(6, 44, 34, 0.88) 0%, rgba(3, 18, 15, 0.96) 100%); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: #34d399; border: 1.5px solid rgba(16, 185, 129, 0.35); margin-top: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(52, 211, 153, 0.12); -webkit-tap-highlight-color: transparent; transition: all 0.25s ease; } @media (hover: hover) { .btn-add:hover { border-color: #10b981; color: #6ee7b7; background: linear-gradient(135deg, rgba(6, 65, 50, 0.92) 0%, rgba(4, 28, 22, 0.96) 100%); box-shadow: 0 0 16px rgba(16, 185, 129, 0.55), inset 0 0 10px rgba(16, 185, 129, 0.2); } } .btn-add:active, .btn-add.btn-glow-active { transform: scale(0.985); border-color: #34d399; color: #ecfdf5; background: linear-gradient(135deg, rgba(6, 78, 59, 0.94) 0%, rgba(4, 35, 28, 0.98) 100%); box-shadow: 0 0 18px rgba(16, 185, 129, 0.75), inset 0 0 12px rgba(52, 211, 153, 0.3); }
         .btn-export { background-color: #2563eb; color: white; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
-        .btn-reset { background-color: #dc2626; color: white; margin: 0 auto; width: calc(100% - 32px); font-size: 14px; padding: 12px; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3); }
+        .btn-reset { background: #0d1424; color: #f87171; border: 1px solid rgba(248, 113, 113, 0.35); box-shadow: inset 0 1px 2px rgba(255,255,255,0.05), 0 4px 10px rgba(0,0,0,0.4); margin: 0 auto; width: calc(100% - 32px); font-size: 14px; padding: 12px; -webkit-tap-highlight-color: transparent; transition: all 0.2s ease; } .btn-reset:hover, .btn-reset:focus-visible { background: #2b0c0c; border-color: rgba(255, 59, 59, 0.85); color: #ffffff; box-shadow: 0 0 12px rgba(255, 59, 59, 0.48), inset 0 0 8px rgba(239, 68, 68, 0.28); text-shadow: 0 0 6px rgba(255, 59, 59, 0.65); } .btn-reset:active { transform: scale(0.97); background: #3d1111; border-color: #ff3b3b; color: #ffffff; box-shadow: 0 0 16px rgba(255, 42, 42, 0.68), inset 0 0 10px rgba(239, 68, 68, 0.38); }
 
         .tool-btn-battery { background: linear-gradient(180deg, #1e293b 0%, #000000 100%); border: 1px solid #10b981; color: #10b981; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 4px 10px rgba(0, 0, 0, 0.5); transition: all 0.2s ease; }
         .tool-btn-battery:hover { border-color: #34d399; color: #34d399; background: linear-gradient(180deg, #334155 0%, #0a0a0a 100%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 12px rgba(16, 185, 129, 0.3); }
@@ -1708,7 +1708,7 @@ if ('serviceWorker' in navigator) {
         renderAppliances(); 
         setTimeout(() => {
             const items = document.querySelectorAll('.appliance-item');
-            if(items.length > 0) items[items.length - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if(items.length > 0) items[items.length - 1].scrollIntoView({ behavior: 'smooth', block: 'start' }); const addBtn = document.querySelector('.btn-add'); if(addBtn) { addBtn.classList.add('btn-glow-active'); setTimeout(() => addBtn.classList.remove('btn-glow-active'), 400); }
         }, 50);
     };
     
@@ -2526,7 +2526,7 @@ if ('serviceWorker' in navigator) {
             }
         }
 
-        const disclaimerEl = document.getElementById("disclaimerCard");
+        const disclaimerEl = document.getElementById("disclaimerCard"); const resSecEl = document.querySelector(".results-container"); if (resSecEl && resSecEl.parentElement) { resSecEl.parentElement.style.display = totalDailyWh > 0 ? "block" : "none"; }
         if (disclaimerEl) {
             if (totalDailyWh > 0) {
                 disclaimerEl.style.display = "block";
