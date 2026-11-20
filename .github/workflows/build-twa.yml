@@ -14,7 +14,7 @@ on:
       version_name:
         description: 'اسم الإصدار الظاهر للمستخدم (Version Name)'
         required: true
-        default: '16'
+        default: '16.0'
 
 jobs:
   build-twa:
@@ -71,8 +71,6 @@ jobs:
             "enableNotifications": true,
             "startUrl": "${{ github.event.inputs.start_url }}",
             "iconUrl": "https://calc.solartoolspro.com/web-app-manifest-512x512.png",
-            "maskableIconUrl": "https://calc.solartoolspro.com/web-app-manifest-512x512.png",
-            "monochromeIconUrl": "https://calc.solartoolspro.com/web-app-manifest-512x512.png",
             "splashScreenFadeOutDuration": 300,
             "signingKey": {
               "path": "./signing.keystore",
@@ -97,7 +95,7 @@ jobs:
           }
           EOF
 
-          bubblewrap update --manifest=twa-manifest.json --appVersionName="${{ github.event.inputs.version_name }}" --skipVersionUpgrade
+          bubblewrap update --manifest=twa-manifest.json --skipVersionUpgrade && sed -i 's/versionName .*/versionName "${{ github.event.inputs.version_name }}"/g' app/build.gradle
           chmod +x gradlew
           ./gradlew bundleRelease assembleRelease \
             -Pandroid.injected.signing.store.file="$(pwd)/signing.keystore" \
@@ -117,4 +115,3 @@ jobs:
           path: |
             ./*.aab
             ./*.apk
-
