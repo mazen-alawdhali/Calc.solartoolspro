@@ -1,4 +1,4 @@
-const CACHE_NAME = 'solar-calc-v18-cache';
+const CACHE_NAME = 'solar-calc-v19-cache';
 const NETWORK_TIMEOUT_MS = 3000;
 
 const urlsToCache = [
@@ -10,7 +10,8 @@ const urlsToCache = [
   '/favicon-96x96.png',
   '/apple-touch-icon.png',
   '/web-app-manifest-192x192.png',
-  '/web-app-manifest-512x512.png'
+  '/web-app-manifest-512x512.png',
+  'https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&display=swap'
 ];
 
 // تنصيب التطبيق وتخزين الملفات في ذاكرة الجوال
@@ -18,7 +19,15 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       console.log('تم حفظ الملفات للعمل أوفلاين بنجاح');
-      return cache.addAll(urlsToCache);
+      return cache.addAll(urlsToCache).then(() =>
+        fetch('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&display=swap')
+          .then(r => r.text())
+          .then(css => {
+            const fontUrls = css.match(/https:\/\/fonts\.gstatic\.com\/[^)]+/g);
+            return fontUrls ? cache.addAll(fontUrls) : null;
+          })
+          .catch(() => {})
+      );
     }).then(() => self.skipWaiting()) // إجبار المتصفح على تفعيل النسخة الجديدة فوراً دون انتظار
   );
 });
@@ -41,8 +50,9 @@ self.addEventListener('activate', event => {
 
 // استراتيجية Network-First مع مهلة 3 ثوانٍ والرجوع للكاش عند التأخير أو الأوفلاين
 self.addEventListener('fetch', (event) => {
-    // تتجاهل الطلبات الخارجية مثل APIs أو روابط تحليلات الزيارات
-    if (event.request.method !== 'GET' || !event.request.url.startsWith(self.location.origin)) {
+    // تتجاهل الطلبات الخارجية مثل APIs أو روابط تحليلات الزيارات وتسمح بخطوط جوجل
+    const isGoogleFont = event.request.url.startsWith('https://fonts.googleapis.com') || event.request.url.startsWith('https://fonts.gstatic.com');
+    if (event.request.method !== 'GET' || (!event.request.url.startsWith(self.location.origin) && !isGoogleFont)) {
         return;
     }
 
