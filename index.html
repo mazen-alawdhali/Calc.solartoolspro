@@ -297,7 +297,7 @@
             }
             .device-counter { display: none !important; }
 
-            input { border: 1px solid #94a3b8 !important; background: #f1f5f9 !important; color: #000000 !important; padding: 4px !important; font-weight: bold !important; font-size: 10.5pt !important; border-radius: 6px !important; text-align: center !important; height: 32px !important; }
+            input { border: 1px solid #94a3b8 !important; background: #f1f5f9 !important; color: #000000 !important; padding: 4px !important; font-weight: bold !important; font-size: 10.5pt !important; border-radius: 6px !important; text-align: center !important; height: 32px !important; text-shadow: none !important; }
             .custom-select-options { display: none !important; }
             .custom-select-display { background: #f1f5f9 !important; border: 1px solid #94a3b8 !important; color: #000000 !important; padding: 4px 10px !important; font-weight: bold !important; font-size: 10.5pt !important; border-radius: 6px !important; height: 32px !important; display: flex !important; justify-content: space-between !important; align-items: center !important; }
             .custom-select-display span:last-child { display: inline-block !important; color: #334155 !important; font-size: 9pt !important; }
@@ -620,8 +620,8 @@
                             </div>
 
                             <div class="input-group" style="grid-column: span 2;">
-                                <label data-i18n="dodLabel">نسبة حماية البطارية (DoD):</label>
-                                <input type="text" inputmode="numeric" id="dodValue" placeholder="DoD 80%" value="DoD 80%" lang="en" onfocus="formatDodInput(this, true)" onblur="formatDodInput(this, false)">
+                                <div class="grid-inputs" style="width: 100%;"><div class="input-group"><label data-i18n="battTypeLabel">نوع البطارية:</label><div class="custom-select-wrapper"><div class="custom-select-display" onclick="toggleDropdown('battTypeDropdown')"><span id="battTypeDisplay" data-i18n="battTypeLi">ليثيوم</span><span>▼</span></div><div class="custom-select-options" id="battTypeDropdown"><div class="custom-option" onclick="selectGlobalOption('batteryType', 'lithium', 'battTypeLi', 'battTypeDisplay', 'battTypeDropdown')" data-i18n="battTypeLi">ليثيوم</div><div class="custom-option" onclick="selectGlobalOption('batteryType', 'lead', 'battTypeLead', 'battTypeDisplay', 'battTypeDropdown')" data-i18n="battTypeLead">جل / أسيد</div></div><input type="hidden" id="batteryType" value="lithium"></div></div><div class="input-group"><label data-i18n="dodLabel">نسبة حماية البطارية (DoD):</label>
+                                <input type="text" inputmode="numeric" id="dodValue" placeholder="80%" value="80%" lang="en" onfocus="formatDodInput(this, true)" onblur="formatDodInput(this, false)"></div></div>
                             </div>
                         </div>
 
@@ -953,7 +953,7 @@
 <script>
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=update19').catch(err => {});
+        navigator.serviceWorker.register('/sw.js?v=update20').catch(err => {});
     });
 }
 
@@ -1000,8 +1000,8 @@ if ('serviceWorker' in navigator) {
                 const title = window.currentLang === 'en' ? "Invalid Input Alert" : "تنبيه إدخال غير صالح";
                 const msg = window.currentLang === 'en' ? "Battery protection rate (DoD) must be between 10% and 100%." : "نسبة حماية البطارية (DoD) يجب أن تكون بين 10% و 100%.";
                 window.openAlertModal(title, msg);
-                val = 80;
-            } else if (val >= 10 && val < 50) {
+                const bType = document.getElementById('batteryType') ? document.getElementById('batteryType').value : 'lithium'; val = bType === 'lead' ? 50 : 80;
+            } else if ((document.getElementById('batteryType') ? document.getElementById('batteryType').value : 'lithium') === 'lithium' && val >= 10 && val < 50) {
                 val = 100 - val;
             }
             input.value = `${val}%`;
@@ -1020,7 +1020,7 @@ if ('serviceWorker' in navigator) {
             panelClimateLabel: "مناخ الألواح (الأداء الحراري):", pClimateMod: "مناخ معتدل", pClimateHot: "مناخ حار جداً",
             climateHintTitle: "تلميح",
             climateHintMsg: "ارتفاع درجات الحرارة في الصيف يقلل من قدرة الألواح بنسبة تصل إلى 15%. اختر (مناخ حار) إذا كنت في منطقة صحراوية أو ساحلية شديدة الحرارة لضمان زيادة عدد الألواح وتغطية أحمالك بكفاءة.", cableClimateHintMsg: "ارتفاع درجات الحرارة يزيد من المقاومة الكهربائية للكابلات ويقلل قدرتها على تحمل التيار (Derating Factor). اختر (مناخ حار جداً) في المناطق الصحراوية أو الساحلية لزيادة معامل الأمان لتجنب سخونة الكابلات وهبوط الجهد.",
-            dodLabel: "نسبة حماية البطارية (DoD):", dod80: "20% أمان (DoD 80%)", dod50: "50% أمان (DoD 50%)",
+            battTypeLabel: "نوع البطارية:", battTypeLi: "ليثيوم", battTypeLead: "جل / أسيد", dodLabel: "نسبة حماية البطارية (DoD):", dod80: "20% أمان (DoD 80%)", dod50: "50% أمان (DoD 50%)",
             hybridTitle: `<span style="display: inline-flex; align-items: center; gap: 8px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8z"/></svg> إعدادات النظام الهجين (اختياري)</span>`,
             hybridHint: "إذا كانت الكهرباء العمومية متوفرة، أدخل البيانات هنا لتقليل حجم المنظومة. (اتركها 0 لنظام مستقل):",
             gridDayHoursLabel: "ساعات الشحن نهاراً (ألواح):", gridNightHoursLabel: "ساعات الشحن ليلاً (بطارية):", acAmpsLabel: "تيار شاحن الشبكة (Amps):",
@@ -1059,7 +1059,7 @@ if ('serviceWorker' in navigator) {
             hvWarning: "⚠️ تنبيه هندسي: القدرات العالية على جهود التشغيل المنخفضة (48V) تولد تيارات تشغيلية عالية ومخاطر حرارية. يُنصح بالانتقال إلى أنظمة الجهد العالي (HV) لرفع الكفاءة والأمان.",
             
             resultsTitle: `<span style="display: inline-flex; align-items: center; gap: 8px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4M7 12l3-3 3 2 4-4"/></svg> نتائج ومخرجات المنظومة الهندسية :</span>`,
-            eTotal: "الطاقة الكلية شاملة الفقد:", battAh: "سعة بطارية الليثيوم المطلوبة:",
+            eTotal: "الطاقة الكلية شاملة الفقد:", battAh: "سعة بطارية الليثيوم المطلوبة:", battAhLead: "سعة بطارية الجل/الأسيد المطلوبة:", leadChargeAlert1: "⚠️ <strong style=\"color:#f59e0b;\">تنبيه شحن (جل/أسيد):</strong> تيار الشحن", leadChargeAlert2: "يتجاوز الحد الآمن الموصى به (0.15C ≈", leadChargeAlert3: "أمبير) لحماية البطاريات من التلف والتبخر. يُنصح بتحديد تيار الشحن من إعدادات الإنفرتر، أو زيادة سعة البطاريات، أو استخدام بطاريات الليثيوم.",
             battKwh: "سعة طاقة البطارية الفعلية:", panelsCount: "عدد الألواح الشمسية المطلوبة:",
             mpptCurrent: "تيار منظم الشحن الأدنى (MPPT):", invRequired: "القدرة المطلوبة للإنفرتر (Inverter):",
             
@@ -1119,7 +1119,7 @@ if ('serviceWorker' in navigator) {
             panelClimateLabel: "Panel Climate:", pClimateMod: "Moderate Climate", pClimateHot: "Very Hot Climate",
             climateHintTitle: "Hint",
             climateHintMsg: "High summer temperatures reduce panel output by up to 15%. Select (Very Hot Climate) if you are in a desert or extremely hot coastal area to ensure increasing panel count and covering your loads efficiently.", cableClimateHintMsg: "High ambient temperatures increase cable electrical resistance and lower current carrying capacity (Derating Factor). Select (Very Hot Climate) in hot or coastal regions to increase safety factor, preventing cable overheating and voltage drops.",
-            dodLabel: "Battery Protection Rate (DoD):", dod80: "20% Safe (DoD 80%)", dod50: "50% Safe (DoD 50%)",
+            battTypeLabel: "Battery Type:", battTypeLi: "Lithium", battTypeLead: "Gel / Lead-Acid", dodLabel: "Battery Protection Rate (DoD):", dod80: "20% Safe (DoD 80%)", dod50: "50% Safe (DoD 50%)",
             hybridTitle: `<span style="display: inline-flex; align-items: center; gap: 8px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8z"/></svg> Hybrid System Settings (Optional)</span>`,
             hybridHint: "If grid/gen is available, enter details to reduce required system size. (Leave 0 for Off-Grid):",
             gridDayHoursLabel: "Daytime Charge Hours (Panels):", gridNightHoursLabel: "Nighttime Charge Hours (Battery):", acAmpsLabel: "AC Charge Current (A):",
@@ -1158,7 +1158,7 @@ if ('serviceWorker' in navigator) {
             hvWarning: "⚠️ Engineering Alert: High capacities on low operating voltages (48V) generate high operational currents and thermal risks. Switching to High Voltage (HV) systems is recommended to enhance efficiency and safety.",
             
             resultsTitle: '<span style="display: inline-flex; align-items: center; gap: 8px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4M7 12l3-3 3 2 4-4"/></svg> Engineering System Results & Output :</span>',
-            eTotal: "Total Energy with Losses:", battAh: "Required Lithium Battery Capacity:",
+            eTotal: "Total Energy with Losses:", battAh: "Required Lithium Battery Capacity:", battAhLead: "Required Gel/Lead-Acid Battery Capacity:", leadChargeAlert1: "⚠️ <strong style=\"color:#f59e0b;\">Charge Alert (Gel/Lead-Acid):</strong> Charging current", leadChargeAlert2: "exceeds safe recommended limit (0.15C ≈", leadChargeAlert3: "A) to prevent overheating & water loss. Limit max charging current in inverter settings, increase battery capacity, or switch to Lithium.",
             battKwh: "Actual Battery Energy:", panelsCount: "Required Solar Panels:",
             mpptCurrent: "Minimum MPPT Charge Current:", invRequired: "Required Inverter Capacity:",
             
@@ -1231,10 +1231,10 @@ if ('serviceWorker' in navigator) {
         return "لوح";
     };
 
-    window.showCableClimateHint = function() { const t = dict[window.currentLang]; window.openAlertModal(t.climateHintTitle, t.cableClimateHintMsg); document.getElementById('modalIcon').innerText = '💡'; }; window.showClimateHint = function() {
+    void function() {
         const t = dict[window.currentLang];
-        window.openAlertModal(t.climateHintTitle, t.climateHintMsg);
-        document.getElementById('modalIcon').innerText = '💡';
+
+
     };
     
     window.toggleTooltip = function(id, event) {     if (event) event.stopPropagation();     document.querySelectorAll('.hint-tooltip').forEach(el => {         if(el.id !== id) el.classList.remove('show');     });     const tooltip = document.getElementById(id);     if (tooltip) tooltip.classList.toggle('show'); };  window.toggleDropdown = function(id) {
@@ -1251,7 +1251,7 @@ if ('serviceWorker' in navigator) {
     };
 
     window.selectGlobalOption = function(inputId, value, i18nKey, displayId, dropdownId) {
-        if(document.getElementById(inputId)) document.getElementById(inputId).value = value;
+        if(document.getElementById(inputId)) document.getElementById(inputId).value = value; if(inputId === 'batteryType' && document.getElementById('dodValue')) { const defaultDod = value === 'lead' ? '50%' : '80%'; document.getElementById('dodValue').value = defaultDod; document.getElementById('dodValue').placeholder = 'DoD ' + defaultDod; }
         const dropdown = document.getElementById(dropdownId);
         if(dropdown) {
             dropdown.classList.remove('show');
@@ -1334,7 +1334,7 @@ if ('serviceWorker' in navigator) {
         const entTypeEl = document.getElementById('enterpriseSystemType');
         const entType = entTypeEl ? entTypeEl.value : "single";
 
-        if(document.getElementById('sysVoltDisplay')) document.getElementById('sysVoltDisplay').innerText = sysVal == "12" ? t.volt12 : (sysVal == "24" ? t.volt24 : t.volt48);
+        if(document.getElementById('sysVoltDisplay')) document.getElementById('sysVoltDisplay').innerText = sysVal == "12" ? t.volt12 : (sysVal == "24" ? t.volt24 : t.volt48); const bTypeVal = document.getElementById('batteryType') ? document.getElementById('batteryType').value : "lithium"; if(document.getElementById('battTypeDisplay')) document.getElementById('battTypeDisplay').innerText = bTypeVal === "lead" ? t.battTypeLead : t.battTypeLi;
         if(document.getElementById('panelClimateDisplay')) document.getElementById('panelClimateDisplay').innerText = pCliVal == "0.85" ? t.pClimateHot : t.pClimateMod;
         if(document.getElementById('climateDisplay')) document.getElementById('climateDisplay').innerText = cliVal == "1.5" || cliVal == "1.50" ? t.climateHot : t.climateMod;
         if(document.getElementById('sysTypeDisplay')) document.getElementById('sysTypeDisplay').innerText = entType === "three48" ? t.three48Opt : (entType === "hv" ? t.hvOpt : t.singlePhaseOpt);
@@ -1509,8 +1509,8 @@ if ('serviceWorker' in navigator) {
         try {
             try { const data = localStorage.getItem("solar_appliances_data_v11"); appliances = data ? JSON.parse(data) : []; } catch(e) { appliances = []; }
             
-            const ids = ["systemVoltage","panelWatts","sunHours","panelClimateFactor","dodValue","gridDayHours","gridNightHours","acChargeCurrent","enterpriseSystemType","enterpriseDailyKwh","enterpriseHoursDay","enterpriseHoursNight"];
-            const keys = ["solar_system_voltage","solar_panel_watts","solar_sun_hours","solar_panel_climate","solar_dod_value","solar_grid_day_hours","solar_grid_night_hours","solar_ac_amps","solar_ent_sys_type","solar_ent_daily_kwh","solar_ent_hours_day","solar_ent_hours_night"];
+            const ids = ["systemVoltage","panelWatts","sunHours","panelClimateFactor","batteryType","dodValue","gridDayHours","gridNightHours","acChargeCurrent","enterpriseSystemType","enterpriseDailyKwh","enterpriseHoursDay","enterpriseHoursNight"];
+            const keys = ["solar_system_voltage","solar_panel_watts","solar_sun_hours","solar_panel_climate","solar_battery_type","solar_dod_value","solar_grid_day_hours","solar_grid_night_hours","solar_ac_amps","solar_ent_sys_type","solar_ent_daily_kwh","solar_ent_hours_day","solar_ent_hours_night"];
             
             ids.forEach((id, i) => { 
                 const el = document.getElementById(id);
@@ -1519,13 +1519,13 @@ if ('serviceWorker' in navigator) {
                     if (val) {
                         let numVal = parseFloat(val.replace(/[^\d.]/g, ''));
                         if (isNaN(numVal) || numVal < 10 || numVal > 100) {
-                            numVal = 80;
-                        } else if (numVal >= 10 && numVal < 50) {
+                            numVal = (localStorage.getItem("solar_battery_type") === "lead") ? 50 : 80;
+                        } else if ((localStorage.getItem("solar_battery_type") || "lithium") === "lithium" && numVal >= 10 && numVal < 50) {
                             numVal = 100 - numVal;
                         }
                         val = `${numVal}%`;
                     } else {
-                        val = "80%";
+                        val = (localStorage.getItem("solar_battery_type") === "lead") ? "50%" : "80%";
                     }
                 }
                 if(el && val) el.value = val; 
@@ -1566,7 +1566,7 @@ if ('serviceWorker' in navigator) {
                 if(cabAcc) cabAcc.classList.add('open');
             }
 
-            ["panelWatts","sunHours","dodValue","gridDayHours","gridNightHours","acChargeCurrent","battDistance","acDistance"].forEach(id => {
+            ["sunHours","dodValue","gridDayHours","gridNightHours","acChargeCurrent","battDistance","acDistance"].forEach(id => {
                 const el = document.getElementById(id);
                 if(el) el.addEventListener("input", function() { let raw = this.value.replace(/[٠-٩]/g, d => "0123456789"["٠١٢٣٤٥٦٧٨٩".indexOf(d)]); if(id === "panelWatts" || id === "acChargeCurrent" || id === "acDistance"){ let val = raw.replace(/[^\d]/g, '').substring(0, 7); if (val.length > 1 && val.startsWith('0')) val = val.replace(/^0+/, ''); this.value = val; } else if(id === "sunHours"){ let val = raw.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').substring(0, 4); if(val.startsWith('0') || val.startsWith('.')) val = ""; else { let num = parseFloat(val); if(!isNaN(num) && num > 9) val = "9"; } this.value = val; } else { let val = raw.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').substring(0, 7); if(val.startsWith('.')) val = '0' + val; this.value = val; } saveDataAndCalculate(); });
             });
@@ -1621,7 +1621,7 @@ if ('serviceWorker' in navigator) {
         const entDailyVal = entDailyEl ? (parseFloat(entDailyEl.value) || 0) : 0;
         
         const entCablesMsg = document.getElementById("ent-cables-override-msg");
-        const appliancesSectionWrapper = document.getElementById("appliancesSectionWrapper"); let isEnt = entDailyVal > 0; let svWrap = document.getElementById("sysVoltDropdown"); if(svWrap){ let sd = svWrap.previousElementSibling; sd.style.pointerEvents = isEnt ? "none" : "auto"; sd.style.opacity = isEnt ? "0.4" : "1"; if(isEnt){ document.getElementById("systemVoltage").value = "48"; document.getElementById("sysVoltDisplay").innerText = dict[window.currentLang].volt48; } } let bDist = document.getElementById("battDistance"); let aDist = document.getElementById("acDistance"); if(bDist && aDist){ if(isEnt){ bDist.value = "0"; aDist.value = "0"; } bDist.disabled = isEnt; aDist.disabled = isEnt; bDist.style.opacity = isEnt ? "0.4" : "1"; aDist.style.opacity = isEnt ? "0.4" : "1"; }
+        const appliancesSectionWrapper = document.getElementById("appliancesSectionWrapper"); let isEnt = entDailyVal > 0; let svWrap = document.getElementById("sysVoltDropdown"); if(svWrap){ let sd = svWrap.previousElementSibling; sd.style.pointerEvents = isEnt ? "none" : "auto"; sd.style.opacity = isEnt ? "0.4" : "1"; if(isEnt){ document.getElementById("systemVoltage").value = "48"; document.getElementById("sysVoltDisplay").innerText = dict[window.currentLang].volt48; } } let btWrap = document.getElementById("battTypeDropdown"); if(btWrap){ let btd = btWrap.previousElementSibling; btd.style.pointerEvents = isEnt ? "none" : "auto"; btd.style.opacity = isEnt ? "0.4" : "1"; if(isEnt){ document.getElementById("batteryType").value = "lithium"; document.getElementById("battTypeDisplay").innerText = dict[window.currentLang].battTypeLi; } } let bDist = document.getElementById("battDistance"); let aDist = document.getElementById("acDistance"); if(bDist && aDist){ if(isEnt){ bDist.value = "0"; aDist.value = "0"; } bDist.disabled = isEnt; aDist.disabled = isEnt; bDist.style.opacity = isEnt ? "0.4" : "1"; aDist.style.opacity = isEnt ? "0.4" : "1"; }
 
         if (entDailyVal > 0) {
             if(appliancesSectionWrapper) appliancesSectionWrapper.style.display = "block"; 
@@ -1795,7 +1795,7 @@ if ('serviceWorker' in navigator) {
         if(document.getElementById("panelWatts")) localStorage.setItem("solar_panel_watts", document.getElementById("panelWatts").value);
         if(document.getElementById("sunHours")) localStorage.setItem("solar_sun_hours", document.getElementById("sunHours").value);
         if(document.getElementById("panelClimateFactor")) localStorage.setItem("solar_panel_climate", document.getElementById("panelClimateFactor").value);
-        if(document.getElementById("dodValue")) localStorage.setItem("solar_dod_value", document.getElementById("dodValue").value);
+        if(document.getElementById("batteryType")) localStorage.setItem("solar_battery_type", document.getElementById("batteryType").value); if(document.getElementById("dodValue")) localStorage.setItem("solar_dod_value", document.getElementById("dodValue").value);
         if(document.getElementById("gridDayHours")) localStorage.setItem("solar_grid_day_hours", document.getElementById("gridDayHours").value);
         if(document.getElementById("gridNightHours")) localStorage.setItem("solar_grid_night_hours", document.getElementById("gridNightHours").value);
         if(document.getElementById("acChargeCurrent")) localStorage.setItem("solar_ac_amps", document.getElementById("acChargeCurrent").value);
@@ -1896,9 +1896,9 @@ if ('serviceWorker' in navigator) {
         const panelWatts = panelWattsEl ? (parseFloat(panelWattsEl.value) || 450) : 450;
         const sunHours = sunHoursEl ? (parseFloat(sunHoursEl.value) || 6) : 6;
         const panelClimateFactor = pClimEl ? (parseFloat(pClimEl.value) || 1.0) : 1.0;
-        let dodRaw = dodValueEl ? parseFloat(dodValueEl.value.replace(/[^\d.]/g, '')) : 80;
-        if (isNaN(dodRaw) || dodRaw <= 0) dodRaw = 80;
-        const dodValue = dodRaw / 100; if (dodValueEl) { const hasDodVal = dodValueEl.value.replace(/[^\d.]/g, '') !== ''; const dodPct = Math.min(100, Math.max(0, dodRaw)); const gradDir = window.currentLang === 'ar' ? 'to left' : 'to right'; const cell3D = `linear-gradient(to bottom, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.02) 50%, rgba(0,0,0,0.28) 100%)`; dodValueEl.style.background = (hasDodVal && dodPct > 0) ? `${cell3D}, linear-gradient(${gradDir}, rgba(5, 150, 105, 0.65) 0%, rgba(16, 185, 129, 0.42) ${dodPct}%, rgba(15, 23, 42, 0.85) ${dodPct}%)` : '#0f172a'; dodValueEl.style.fontFamily = hasDodVal ? "'Chakra Petch', sans-serif" : ''; dodValueEl.style.fontVariantNumeric = hasDodVal ? 'tabular-nums' : ''; dodValueEl.style.fontWeight = hasDodVal ? '700' : ''; dodValueEl.style.fontSize = hasDodVal ? '17px' : ''; dodValueEl.style.letterSpacing = hasDodVal ? '1.5px' : ''; dodValueEl.style.color = hasDodVal ? '#f0fdf4' : ''; dodValueEl.style.textShadow = hasDodVal ? '0 0 10px rgba(74, 222, 128, 0.6), 0 1px 3px rgba(0, 0, 0, 0.95)' : ''; }
+        const battTypeEl = document.getElementById("batteryType"); const batteryType = battTypeEl ? (battTypeEl.value || "lithium") : "lithium"; const isLeadAcid = (batteryType === "lead" && (parseFloat(document.getElementById("enterpriseDailyKwh") ? document.getElementById("enterpriseDailyKwh").value : 0) || 0) === 0); let dodRaw = dodValueEl ? parseFloat(dodValueEl.value.replace(/[^\d.]/g, '')) : (isLeadAcid ? 50 : 80);
+        if (isNaN(dodRaw) || dodRaw <= 0) dodRaw = isLeadAcid ? 50 : 80;
+        const dodValue = dodRaw / 100; if (dodValueEl) { const hasDodVal = dodValueEl.value.replace(/[^\d.]/g, '') !== ''; const dodPct = Math.min(100, Math.max(0, dodRaw)); const gradDir = window.currentLang === 'ar' ? 'to left' : 'to right'; const cell3D = `linear-gradient(to bottom, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.02) 50%, rgba(0,0,0,0.28) 100%)`; const barFill = isLeadAcid ? `rgba(217, 119, 6, 0.65) 0%, rgba(245, 158, 11, 0.42)` : `rgba(5, 150, 105, 0.65) 0%, rgba(16, 185, 129, 0.42)`; dodValueEl.style.background = (hasDodVal && dodPct > 0) ? `${cell3D}, linear-gradient(${gradDir}, ${barFill} ${dodPct}%, rgba(15, 23, 42, 0.85) ${dodPct}%)` : '#0f172a'; dodValueEl.style.fontFamily = hasDodVal ? "'Chakra Petch', sans-serif" : ''; dodValueEl.style.fontVariantNumeric = hasDodVal ? 'tabular-nums' : ''; dodValueEl.style.fontWeight = hasDodVal ? '700' : ''; dodValueEl.style.fontSize = hasDodVal ? '14px' : ''; dodValueEl.style.letterSpacing = hasDodVal ? '1px' : ''; dodValueEl.style.color = hasDodVal ? '#f0fdf4' : ''; dodValueEl.style.textShadow = hasDodVal ? '0 0 10px rgba(74, 222, 128, 0.6), 0 1px 3px rgba(0, 0, 0, 0.95)' : ''; }
         
         const gDayEl = document.getElementById("gridDayHours");
         const gNightEl = document.getElementById("gridNightHours");
@@ -2011,16 +2011,16 @@ if ('serviceWorker' in navigator) {
                 let bufferKwh = ((maxContinuous * INVERTER_SAFETY_FACTOR) / 1000) * 1.2; 
                 battKwh = bufferKwh;
             } else {
-                battKwh = (nightOutageWh / dodValue) / 1000;
+                const BATT_DISCHARGE_EFF = isLeadAcid ? 0.90 : 1.0; battKwh = ((nightOutageWh / BATT_DISCHARGE_EFF) / dodValue) / 1000;
                 if (nightLoadWh > 0) {
-                    let minBattKwh = (sysVolt === 12) ? 1.28 : 2.56; 
+                    let minBattKwh = isLeadAcid ? (1.20 * (sysVolt / 12)) : ((sysVolt === 12) ? 1.28 : 2.56); 
                     battKwh = Math.max(battKwh, minBattKwh);
                 }
             }
         }
 
         const totalGridChargeEnergy = gridChargeDayWh + gridChargeNightWh;
-        const solarReqNightWh = Math.max(0, (battKwh * 1000 * dodValue) - totalGridChargeEnergy);
+        const BATT_CHARGE_EFF = isLeadAcid ? 0.85 : 1.0; const solarReqNightWh = Math.max(0, ((battKwh * 1000 * dodValue) / BATT_CHARGE_EFF) - totalGridChargeEnergy);
         const dayOutageWh = Math.max(0, eDayTotal - (gridDirectDayWh * SYSTEM_LOSS_FACTOR));
         
         const totalSolarWhRequired = dayOutageWh + solarReqNightWh;
@@ -2085,7 +2085,7 @@ if ('serviceWorker' in navigator) {
             isContainer = selectedOpt.c;
             effectiveSysVolt = packVoltage; 
         } else {
-            let lvOpts = [];
+            let lvOpts = []; if (isLeadAcid) { packVoltage = sysVolt; if (sysVolt === 12) { lvOpts = [{ kwh: 2.40, label: "2.40 kWh (12V 200Ah)" }, { kwh: 1.80, label: "1.80 kWh (12V 150Ah)" }, { kwh: 1.20, label: "1.20 kWh (12V 100Ah)" }]; } else if (sysVolt === 24) { lvOpts = [{ kwh: 4.80, label: "4.80 kWh (2x12V 200Ah)" }, { kwh: 3.60, label: "3.60 kWh (2x12V 150Ah)" }, { kwh: 2.40, label: "2.40 kWh (2x12V 100Ah)" }]; } else { lvOpts = [{ kwh: 9.60, label: "9.60 kWh (4x12V 200Ah)" }, { kwh: 7.20, label: "7.20 kWh (4x12V 150Ah)" }, { kwh: 4.80, label: "4.80 kWh (4x12V 100Ah)" }]; } } else
             if (sysVolt === 12) {
                 lvOpts = [
                     { kwh: 2.56, label: "2.56 kWh (12.8V 200Ah)" },
@@ -2162,25 +2162,25 @@ if ('serviceWorker' in navigator) {
         let mpptDisplay = `${fmt2(mpptCurrent)} ${t.ampWord}`;
         if ((effectiveSysVolt <= 48 && mpptCurrent > 250) || (effectiveSysVolt === 12 && mpptCurrent > 150)) {
             let limit = (effectiveSysVolt === 48) ? 150 : 100;
-            mpptDisplay += `<div style="width:100%; font-size:11.5px; color:#ef4444; font-weight:normal; margin-top:2px; direction: rtl;">(${t.mpptAlert1} ${Math.ceil(mpptCurrent/limit).toLocaleString("en-US")} ${t.mpptAlert2} ${limit}A ${t.mpptAlert3})</div>`;
+            mpptDisplay += `<div class="engineering-alert" style="margin-top: 10px; font-size: 12.5px; line-height: 1.65; direction: ${window.currentLang === 'en' ? 'ltr' : 'rtl'};">⚠️ ${t.mpptAlert1} <strong dir="ltr" style="display:inline-block;">${Math.ceil(mpptCurrent/limit).toLocaleString("en-US")}</strong> ${t.mpptAlert2} <strong dir="ltr" style="display:inline-block;">${limit}A</strong> ${t.mpptAlert3}.</div>`;
         }
         
         let batteryBufferNote = (nightLoadWh === 0) ? `<br><span style="font-size:11px; color:#94a3b8; display:inline-block; margin-top:2px;">${t.bufferNoteAr}</span>` : "";
 
         if(resTotalEnergyEl) resTotalEnergyEl.innerHTML = `<span dir="ltr" style="display:inline-block;">${formatWh(eTotal)}</span>${t.dayUnit}`;
         
-        if(resBatteryAhEl) resBatteryAhEl.innerHTML = `${fmt2(battAh)} Ah ${entSysType === "hv" && entDailyKwh > 0 ? '<span style="font-size:11px; color:#94a3b8;">(High Voltage)</span>' : ''}`;
+        if(resBatteryAhEl) { if(resBatteryAhEl.previousElementSibling) resBatteryAhEl.previousElementSibling.innerHTML = isLeadAcid ? t.battAhLead : t.battAh; resBatteryAhEl.innerHTML = `${fmt2(battAh)} Ah ${entSysType === "hv" && entDailyKwh > 0 ? '<span style="font-size:11px; color:#94a3b8;">(High Voltage)</span>' : ''}`; }
         
         if(resBatteryKwhEl) {
-            const unitWordAr = window.currentLang === 'ar' ? 'وحدة' : 'Units';
+            const displayCount = isLeadAcid ? (totalRacks * (sysVolt / 12)) : totalRacks; const unitWordAr = window.currentLang === 'ar' ? 'وحدة' : 'Units';
             let actualBattWh = battKwh * effectiveSysVolt > 0 ? (totalRacks * standardRackKwh) * 1000 : 0;
-            resBatteryKwhEl.innerHTML = `<span dir="ltr" style="display:inline-block;">${formatWh(actualBattWh)}</span> <span style="color:#64748b; font-size: 13px; font-weight: normal;">(${totalRacks} ${unitWordAr})</span>${batteryBufferNote}`;
+            resBatteryKwhEl.innerHTML = `<span dir="ltr" style="display:inline-block;">${formatWh(actualBattWh)}</span> <span dir="${window.currentLang === 'ar' ? 'rtl' : 'ltr'}" style="color:#64748b; font-size: 13px; font-weight: normal; unicode-bidi: isolate;">(${displayCount} ${unitWordAr})</span>${batteryBufferNote}`;
         }
         
         let pnlText = getArabicPanelsString(panelsCount);
         if(resPanelsCountEl) resPanelsCountEl.innerHTML = `${panelsCount.toLocaleString("en-US")} ${pnlText} <span style="color:#64748b; font-size: 13px; font-weight: normal; direction: ltr; display: inline-block;">(${formatW(totalPanelPower, true)})</span>`;
         
-        if(resMpptCurrentEl) resMpptCurrentEl.innerHTML = mpptDisplay;
+        if (isLeadAcid && battAh > 0 && mpptCurrent > (battAh * 0.15)) { let safeLeadAmps = battAh * 0.15; mpptDisplay += `<div class="engineering-alert" style="margin-top: 10px; font-size: 12.5px; line-height: 1.65; direction: ${window.currentLang === 'en' ? 'ltr' : 'rtl'}; background: rgba(245, 158, 11, 0.1); border: 1.5px solid #f59e0b; color: #e2e8f0; box-shadow: none;">${t.leadChargeAlert1} <b style="color:#f59e0b;" dir="ltr">${fmt2(mpptCurrent)} ${t.ampWord}</b> ${t.leadChargeAlert2} <b style="color:#f59e0b;" dir="ltr">${fmt2(safeLeadAmps)}</b> ${t.leadChargeAlert3}</div>`; } if(resMpptCurrentEl) resMpptCurrentEl.innerHTML = mpptDisplay;
 
         let isResidentialLimitExceeded = false;
 
@@ -2594,7 +2594,7 @@ if ('serviceWorker' in navigator) {
         if(document.getElementById("panelWatts")) document.getElementById("panelWatts").value="450"; 
         if(document.getElementById("sunHours")) document.getElementById("sunHours").value="6"; 
         if(document.getElementById("panelClimateFactor")) document.getElementById("panelClimateFactor").value="1.0"; 
-        if(document.getElementById("dodValue")) document.getElementById("dodValue").value="DoD 80%"; 
+        if(document.getElementById("batteryType")) document.getElementById("batteryType").value="lithium"; if(document.getElementById("dodValue")) { document.getElementById("dodValue").value="80%"; document.getElementById("dodValue").placeholder="80%"; } 
         
         if(document.getElementById("gridDayHours")) document.getElementById("gridDayHours").value="";
         if(document.getElementById("gridNightHours")) document.getElementById("gridNightHours").value="";
