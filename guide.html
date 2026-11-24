@@ -268,7 +268,7 @@
             margin-top: 30px;
         }
 
-        /* زر الانتقال الرئيسي (مطابق لزر حاسبة البطارية والألواح ذو الإطار المضيء واللون الأخضر الساطع) */
+        /* زر الانتقال الرئيسي */
         .btn-custom-primary {
             display: inline-flex;
             align-items: center;
@@ -294,7 +294,7 @@
             transform: translateY(-2px);
         }
 
-        /* زر التحميل الثانوي (مطابق لزر تحميل النسخة المطبوعة ذو الإطار الأزرق الشفاف والداكن) */
+        /* زر التحميل الثانوي */
         .btn-custom-secondary {
             display: inline-flex;
             align-items: center;
@@ -466,11 +466,17 @@
                             <li><strong>2. مناخ حار جداً :</strong> يعتمد في المناطق الصحراوية والحارة؛ حيث ترفع الخوارزمية قدرة مصفوفة الألواح تلقائياً لتعويض الفقد الناتج عن ارتفاع درجة حرارة الألواح.</li>
                         </ul>
                     </li>
-                    <li><strong>نسبة حماية البطارية :</strong> تعبر هذه الخانة عن أقصى نسبة مسموح بها لتفريغ طاقة البطارية، مع الإبقاء على نسبة متبقية كاحتياطي أمان لحماية خلايا البطارية وإطالة عمرها الافتراضي. المفهوم الهندسي: عند إدخال 80 ، تقوم الحاسبة باحتساب 80% فقط من سعة البطارية للاستخدام الفعلي، وتخصيص %20% كحد حماية يمنع التفريغ العميق.
+                    <li><strong>نوع البطارية:</strong> خيار ذكي يتيح لك تحديد كيمياء البطاريات المستخدمة في المنظومة، وبناءً عليه يقوم التطبيق تلقائياً بضبط وتلوين مؤشر <strong>(نسبة حماية البطارية DoD)</strong> بالقيمة الهندسية الآمنة والموصى بها:
+                        <ul>
+                            <li><strong>1. ليثيوم (Lithium / LiFePO4):</strong> يضبط الحماية تلقائياً عند <strong>80%</strong> (باللون الأخضر)، مما يتيح الاستفادة القصوى من سعة البطارية مع الحفاظ على أمان عالٍ وعمر افتراضي طويل.</li>
+                            <li><strong>2. جل / أسيد (GEL / Lead-Acid):</strong> يضبط الحماية تلقائياً عند <strong>50%</strong> (باللون البرتقالي التحذيري)، لمنع التفريغ العميق الذي يسبب تلف الألواح الداخلية وتدهور البطارية السريع.</li>
+                        </ul>
+                    </li>
+                    <li><strong>نسبة حماية البطارية (DoD):</strong> تعبر هذه الخانة عن أقصى نسبة مسموح بها لتفريغ طاقة البطارية، مع الإبقاء على النسبة المتبقية كاحتياطي أمان لحماية خلايا البطارية وإطالة عمرها الافتراضي. يتم ضبطها تلقائياً بمجرد اختيار نوع البطارية، كما تظل مرنة وقابلة للتعديل اليدوي الدقيق حسب توصيات الشركة المصنعة للبطارية.
                         <br><br><strong>القيم الموصى بها:</strong>
                         <ul>
-                            <li>بطاريات الليثيوم (LiFePO4): يُوصى بضبط القيمة بين 80 و 90% استفادة قصوى مع أمان عال).</li>
-                            <li>بطاريات الجيل والجل / أنبوبي Lead Acid / GEL): يُوصى بضبط القيمة عند 50% لمنع تدهور البطارية السريع.</li>
+                            <li>بطاريات الليثيوم (LiFePO4): يُوصى بضبط القيمة بين 80% و 90% (استفادة قصوى مع أمان عالٍ).</li>
+                            <li>بطاريات الجيل والجل / أنبوبي (Lead Acid / GEL): يُوصى بضبط القيمة عند 50% لمنع تدهور البطارية السريع.</li>
                         </ul>
                     </li>
                 </ul>
@@ -487,7 +493,13 @@
                             <li><strong>2. Very Hot Climate:</strong> Used in desert and hot regions; the algorithm automatically increases the array capacity to compensate for power loss due to panel heating.</li>
                         </ul>
                     </li>
-                    <li><strong>Battery Protection Rate (DoD):</strong> Represents the maximum allowable Depth of Discharge, keeping the remainder as a safety reserve to protect battery cells and extend their lifespan. Engineering concept: entering 80 means the calculator uses only 80% of battery capacity for actual load, reserving 20% to prevent deep discharge.
+                    <li><strong>Battery Type:</strong> A smart selection field that defines the battery chemistry used in the system. Upon selection, the app automatically configures and color-codes the <strong>(Battery Protection Rate - DoD)</strong> indicator to the recommended engineering safety threshold:
+                        <ul>
+                            <li><strong>1. Lithium (LiFePO4):</strong> Automatically sets DoD to <strong>80%</strong> (highlighted in Green), allowing maximum capacity utilization while maintaining high safety and cycle life.</li>
+                            <li><strong>2. GEL / Lead-Acid:</strong> Automatically sets DoD to <strong>50%</strong> (highlighted in Amber), preventing deep discharge that leads to sulfation and rapid battery degradation.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Battery Protection Rate (DoD):</strong> Represents the maximum allowable Depth of Discharge, keeping the remainder as a safety reserve to protect battery cells and extend their lifespan. It is automatically adjusted based on the selected battery type, while remaining customizable to match specific manufacturer datasheets.
                         <br><br><strong>Recommended Values:</strong>
                         <ul>
                             <li>Lithium Batteries (LiFePO4): 80% to 90% (Maximum utilization with high safety).</li>
@@ -908,7 +920,7 @@
                 const imgNum = img.getAttribute('data-img-num');
                 if (imgNum) {
                     const langSuffix = currentLang === 'en' ? 'e' : 'a';
-                    img.src = `images/${imgNum}${langSuffix}.jpg?v=4`;
+                    img.src = `images/${imgNum}${langSuffix}.jpg?v=5`;
                 }
             });
         }
