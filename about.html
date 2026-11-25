@@ -12,7 +12,7 @@
         * { box-sizing: border-box; }
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: #000000; 
+            background-color: #0f172a; 
             color: #e2e8f0; 
             margin: 0; 
             padding: 16px 12px; 
@@ -24,14 +24,14 @@
         .container { 
             width: 100%; 
             max-width: 650px; 
-            background-color: #000000; 
+            background-color: #1e293b; 
             border-radius: 24px; 
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.8); 
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4); 
             padding-bottom: 24px; 
-            border: 1px solid #334155; 
+            border: 1px solid rgba(16, 185, 129, 0.25); 
         }
         .header { 
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.60), rgba(15, 23, 42, 0.80)); 
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); 
             color: white; 
             text-align: center; 
             padding: 40px 16px 20px 16px; 
@@ -47,7 +47,7 @@
             position: absolute; 
             top: 16px; 
             left: 16px; 
-            background: #000000; 
+            background: rgba(15, 23, 42, 0.8); 
             color: white; 
             border: 1px solid #334155; 
             padding: 6px 14px; 
@@ -62,10 +62,10 @@
             font-family: inherit;
         }
         .lang-btn svg { width: 15px; height: 15px; fill: currentColor; }
-        .lang-btn:hover { background: #1e293b; }
+        .lang-btn:hover { background: #0f172a; border-color: #10b981; }
         [dir="ltr"] .lang-btn { left: auto; right: 16px; }
 
-        .content-section { padding: 20px; border-bottom: 1px solid #1e293b; }
+        .content-section { padding: 20px; border-bottom: 1px solid #334155; }
         .content-section:last-of-type { border-bottom: none; }
         .section-title { font-size: 16px; font-weight: 700; color: #10b981; margin-top: 0; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
         .text-block { font-size: 13.5px; color: #cbd5e1; margin-bottom: 12px; }
@@ -78,11 +78,11 @@
             background: rgba(16, 185, 129, 0.1);
             border: 1px solid rgba(16, 185, 129, 0.3);
             border-radius: 12px;
-            padding: 12px;
+            padding: 14px;
             text-align: center;
             margin-top: 10px;
         }
-        .dev-name { color: #10b981; font-weight: 700; font-size: 15px; }
+        .dev-name { color: #10b981; font-weight: 700; font-size: 15px; margin-top: 4px; }
 
         .footer-nav { text-align: center; padding: 20px 16px 0 16px; }
         .btn-back {
@@ -91,16 +91,34 @@
             justify-content: center;
             gap: 8px;
             background-color: #0f172a;
-            color: #38bdf8;
-            border: 1px solid #38bdf8;
-            padding: 10px 20px;
+            color: #10b981;
+            border: 1.5px solid #10b981;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.28);
+            padding: 11px 24px;
             border-radius: 12px;
             text-decoration: none;
-            font-size: 13px;
+            font-size: 13.5px;
             font-weight: 700;
+            cursor: pointer;
             transition: all 0.2s;
+            font-family: inherit;
         }
-        .btn-back:hover { background-color: #38bdf8; color: #000; }
+        .btn-back:hover {
+            background-color: rgba(16, 185, 129, 0.15);
+            box-shadow: 0 0 18px rgba(16, 185, 129, 0.45);
+            color: #34d399;
+        }
+
+        .page-footer {
+            text-align: center;
+            margin-top: 22px;
+            padding: 16px 16px 0 16px;
+            border-top: 1px solid #334155;
+            font-size: 12.5px;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+        .page-footer .author-name { color: #10b981; font-weight: 700; }
     </style>
 </head>
 <body>
@@ -138,21 +156,25 @@
         </div>
     </div>
 
-    <!-- بطاقة المطور وحقوق الملكية -->
+    <!-- بطاقة المطور -->
     <div class="content-section">
-        <div class="section-title" id="sec4Title">👨‍‍💻 التطوير وحقوق الملكية</div>
+        <div class="section-title" id="sec4Title">👨‍💻 التطوير وحقوق الملكية</div>
         <div class="badge-dev">
             <div id="devLabel" style="font-size: 12px; color: #94a3b8;">تم التصميم والتطوير بواسطة:</div>
             <div class="dev-name">م. مازن العوذلي</div>
-            <div id="copyRight" style="font-size: 12px; color: #64748b; margin-top: 4px;">جميع الحقوق محفوظة &copy; 2026</div>
         </div>
     </div>
 
     <div class="footer-nav">
-        <a href="index.html" class="btn-back" id="btnBack">
+        <a href="index.html" onclick="return goBackToApp(event);" class="btn-back" id="btnBack">
             🏠 العودة للحاسبة الرئيسية
         </a>
     </div>
+
+    <footer class="page-footer">
+        <div id="footerAuthor"><span class="author-name">م. مازن العوذلي</span></div>
+        <div id="footerCopy">جميع الحقوق محفوظة &copy; 2026 لـ حاسبة الطاقة الشمسية الذكية</div>
+    </footer>
 </div>
 
 <script>
@@ -185,7 +207,8 @@ const i18n = {
         sec4Title: '👨‍💻 التطوير وحقوق الملكية',
         devLabel: 'تم التصميم والتطوير بواسطة:',
         devName: 'م. مازن العوذلي',
-        copyRight: 'جميع الحقوق محفوظة &copy; 2026',
+        footerAuthor: '<span class="author-name"></span>',
+        footerCopy: 'جميع الحقوق محفوظة &copy; 2026 لـ حاسبة الطاقة الشمسية الذكية',
         btnBack: '🏠 العودة للحاسبة الرئيسية'
     },
     en: {
@@ -213,10 +236,26 @@ const i18n = {
         sec4Title: '👨‍💻 Developer & Copyright',
         devLabel: 'Designed & Developed by:',
         devName: 'Eng. Mazen Al-Awdhali',
-        copyRight: 'All Rights Reserved &copy; 2026',
+        footerAuthor: '<span class="author-name"></span>',
+        footerCopy: 'All Rights Reserved &copy; 2026 for Smart Solar Energy Calculator',
         btnBack: '🏠 Back to Calculator'
     }
 };
+
+function goBackToApp(event) {
+    if (event) event.preventDefault();
+    try { window.close(); } catch (e) {}
+    setTimeout(function() {
+        if (!window.closed) {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = 'index.html';
+            }
+        }
+    }, 120);
+    return false;
+}
 
 function toggleLanguage() {
     currentLang = currentLang === 'ar' ? 'en' : 'ar';
@@ -237,7 +276,6 @@ function applyLanguage() {
     document.getElementById('sec1Text').innerHTML = data.sec1Text;
     document.getElementById('sec2Title').innerText = data.sec2Title;
     
-    // إدراج الميزات الشاملة
     const listEl = document.getElementById('featuresList');
     listEl.innerHTML = '';
     data.features.forEach(item => {
@@ -251,7 +289,8 @@ function applyLanguage() {
     document.getElementById('sec4Title').innerText = data.sec4Title;
     document.getElementById('devLabel').innerText = data.devLabel;
     document.querySelector('.dev-name').innerText = data.devName;
-    document.getElementById('copyRight').innerHTML = data.copyRight;
+    document.getElementById('footerAuthor').innerHTML = data.footerAuthor;
+    document.getElementById('footerCopy').innerHTML = data.footerCopy;
     document.getElementById('btnBack').innerText = data.btnBack;
 }
 

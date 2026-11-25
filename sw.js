@@ -1,4 +1,4 @@
-const CACHE_NAME = 'solar-calc-v20-cache';
+const CACHE_NAME = 'solar-calc-v21-cache';
 const NETWORK_TIMEOUT_MS = 3000;
 
 const urlsToCache = [

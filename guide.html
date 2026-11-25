@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" translate="no">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
     <title>الدليل الهندسي والشرح التفصيلي - حاسبة الطاقة الشمسية الذكية</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,19 +11,19 @@
     
     <style>
         :root {
-            --bg-primary: #0f172a;
-            --bg-card: #1e293b;
-            --bg-card-hover: #334155;
+            --bg-primary: #000000;
+            --bg-card: #0f172a;
+            --bg-card-hover: #1e293b;
             --text-main: #ffffff;
             --text-muted: #e2e8f0;
             --accent-green: #10b981;
             --accent-green-hover: #059669;
-            --accent-blue: #3b82f6;
+            --accent-blue: #38bdf8;
             --accent-amber: #f59e0b;
             --border-color: #334155;
-            --radius-lg: 16px;
+            --radius-lg: 24px;
             --radius-md: 12px;
-            --shadow-glow: 0 10px 25px -5px rgba(16, 185, 129, 0.15);
+            --shadow-glow: 0 10px 25px -5px rgba(0, 0, 0, 0.8);
         }
 
         * {
@@ -36,7 +37,7 @@
             background-color: var(--bg-primary);
             color: var(--text-main);
             line-height: 1.7;
-            padding: 20px;
+            padding: 16px 12px;
             display: flex;
             justify-content: center;
         }
@@ -47,20 +48,26 @@
 
         .container {
             width: 100%;
-            max-width: 900px;
+            max-width: 650px;
+            background-color: #000000;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 0 0 24px 0;
             margin: 0 auto;
             position: relative;
+            box-shadow: var(--shadow-glow);
+            overflow: hidden;
         }
 
         /* تصميم الهيدر الاحترافي بالصيغة المطلوبة header_bg_1.webp */
         .header {
             text-align: center;
-            background: linear-gradient(rgba(15, 23, 42, 0.5), rgba(15, 23, 42, 0.7)), url('images/header_bg_1.webp') center/cover no-repeat;
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 45px 20px;
-            margin-bottom: 25px;
-            box-shadow: var(--shadow-glow);
+            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(15, 23, 42, 0.78)), url('images/header_bg_1.webp') center/cover no-repeat;
+            border-bottom: 1px solid var(--border-color);
+            border-top-left-radius: var(--radius-lg);
+            border-top-right-radius: var(--radius-lg);
+            padding: 42px 16px 24px 16px;
+            margin-bottom: 20px;
             position: relative;
             overflow: hidden;
         }
@@ -68,72 +75,69 @@
         /* زر تغيير اللغة داخل الهيدر بتصميم أنيق */
         .lang-toggle { 
             position: absolute; 
-            top: 15px; 
-            left: 15px; 
-            background: rgba(15, 23, 42, 0.6); 
-            border: 1px solid rgba(255, 255, 255, 0.3); 
+            top: 16px; 
+            left: 16px; 
+            background: #000000; 
+            border: 1px solid var(--border-color); 
             color: white; 
             padding: 6px 14px; 
             border-radius: 20px; 
             font-size: 13px; 
-            font-weight: bold; 
+            font-weight: 700; 
             cursor: pointer; 
-            backdrop-filter: blur(6px); 
             transition: 0.2s; 
             z-index: 10; 
-            display: flex; 
+            display: inline-flex; 
             align-items: center; 
             gap: 6px; 
         }
-        html[dir="ltr"] .lang-toggle { left: auto; right: 15px; }
-        .lang-toggle:hover { background: rgba(16, 185, 129, 0.4); border-color: var(--accent-green); }
+        html[dir="ltr"] .lang-toggle { left: auto; right: 16px; }
+        .lang-toggle:hover { background: #1e293b; border-color: var(--accent-green); }
 
         /* الصندوق الزجاجي الداخلي في الهيدر */
         .header-glass-box {
-            background: rgba(15, 23, 42, 0.65);
+            background: rgba(15, 23, 42, 0.72);
             backdrop-filter: blur(8px);
             border: 1px solid rgba(16, 185, 129, 0.4);
             border-radius: 14px;
-            padding: 25px 15px;
-            max-width: 650px;
+            padding: 20px 15px;
+            max-width: 580px;
             margin: 0 auto;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
         }
 
         .header h1 {
-            font-size: 1.85rem;
-            color: var(--text-main);
+            font-size: 1.55rem;
+            color: var(--accent-green);
             font-weight: 800;
-            margin-bottom: 10px;
-            letter-spacing: -0.5px;
+            margin-bottom: 8px;
         }
 
         .header p {
             color: var(--text-muted);
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: 500;
         }
 
         .sub-version-badge {
-            margin-top: 15px;
-            font-size: 0.85rem;
+            margin-top: 12px;
+            font-size: 0.82rem;
             color: var(--accent-green);
             font-weight: 700;
-            letter-spacing: 0.5px;
         }
 
         .nav-index {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            margin-bottom: 25px;
+            border-radius: 16px;
+            padding: 18px;
+            margin: 0 16px 20px 16px;
         }
 
         .nav-index h3 {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: var(--accent-green);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -141,8 +145,8 @@
 
         .nav-links {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 8px;
             list-style: none;
         }
 
@@ -152,7 +156,7 @@
             background: rgba(255, 255, 255, 0.03);
             padding: 8px 12px;
             border-radius: var(--radius-md);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             border: 1px solid transparent;
             transition: all 0.2s ease;
             display: block;
@@ -167,15 +171,15 @@
         .section-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 25px;
-            margin-bottom: 25px;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 0 16px 20px 16px;
         }
 
         .section-title {
-            font-size: 1.3rem;
+            font-size: 1.15rem;
             color: var(--accent-green);
-            margin-bottom: 15px;
+            margin-bottom: 14px;
             padding-bottom: 10px;
             border-bottom: 1px solid var(--border-color);
             display: flex;
@@ -184,13 +188,13 @@
         }
 
         .content-block {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .content-block h4 {
             color: var(--accent-blue);
-            font-size: 1.05rem;
-            margin-top: 15px;
+            font-size: 1rem;
+            margin-top: 14px;
             margin-bottom: 8px;
             display: flex;
             align-items: center;
@@ -199,7 +203,7 @@
 
         .content-block p, .content-block ul {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             margin-bottom: 10px;
         }
 
@@ -208,9 +212,8 @@
             padding: 0;
         }
 
-        /* LTR/RTL support for bullets */
-        html[dir="rtl"] .content-block ul li { padding-right: 20px; margin-bottom: 8px; position: relative; }
-        html[dir="ltr"] .content-block ul li { padding-left: 20px; margin-bottom: 8px; position: relative; }
+        html[dir="rtl"] .content-block ul li { padding-right: 18px; margin-bottom: 8px; position: relative; }
+        html[dir="ltr"] .content-block ul li { padding-left: 18px; margin-bottom: 8px; position: relative; }
         
         html[dir="rtl"] .content-block ul li::before {
             content: "•"; color: var(--accent-green); font-weight: bold; font-size: 1.2rem; position: absolute; right: 0; top: -2px;
@@ -221,24 +224,24 @@
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
-            margin: 15px 0 20px 0;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin: 15px 0 18px 0;
         }
 
         .image-container {
             text-align: center;
-            background: rgba(15, 23, 42, 0.6);
-            padding: 12px;
+            background: rgba(0, 0, 0, 0.55);
+            padding: 10px;
             border-radius: var(--radius-md);
             border: 1px solid var(--border-color);
-            margin: 15px 0 20px 0;
+            margin: 14px 0 18px 0;
         }
 
         .image-container img {
             max-width: 100%;
             height: auto;
-            max-height: 380px;
+            max-height: 360px;
             border-radius: 6px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
             object-fit: contain;
@@ -247,10 +250,10 @@
         .info-box {
             padding: 12px 15px;
             border-radius: 4px var(--radius-md) var(--radius-md) 4px;
-            margin: 15px 0;
-            font-size: 0.9rem;
+            margin: 14px 0;
+            font-size: 0.88rem;
             color: var(--text-main);
-            background: rgba(59, 130, 246, 0.08);
+            background: rgba(56, 189, 248, 0.08);
             border-right: 4px solid var(--accent-blue);
         }
         html[dir="ltr"] .info-box {
@@ -259,80 +262,82 @@
             border-radius: var(--radius-md) 4px 4px var(--radius-md);
         }
 
-        /* تصاميم الأزرار الجديدة المطابقة للصور الاحترافية */
         .actions-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
             align-items: center;
-            margin-top: 30px;
+            margin: 24px 16px 12px 16px;
         }
 
-        /* زر الانتقال الرئيسي */
         .btn-custom-primary {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             width: 100%;
             max-width: 500px;
-            padding: 16px 24px;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: 14px 20px;
+            background: #0f172a;
             color: var(--accent-green);
             border: 2px solid var(--accent-green);
             border-radius: var(--radius-md);
             font-weight: 800;
-            font-size: 1.05rem;
+            font-size: 1rem;
             text-decoration: none;
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.25);
-            transition: all 0.3s ease;
+            box-shadow: 0 0 14px rgba(16, 185, 129, 0.32);
+            transition: all 0.2s ease;
         }
         .btn-custom-primary:hover {
-            background: rgba(16, 185, 129, 0.1);
-            box-shadow: 0 6px 25px rgba(16, 185, 129, 0.4);
+            background: rgba(16, 185, 129, 0.14);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.48);
+            color: #34d399;
             transform: translateY(-2px);
         }
 
-        /* زر التحميل الثانوي */
         .btn-custom-secondary {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             width: 100%;
             max-width: 500px;
-            padding: 16px 24px;
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
+            padding: 12px 20px;
+            background: #0f172a;
+            color: var(--accent-blue);
+            border: 1px solid var(--accent-blue);
             border-radius: var(--radius-md);
             font-weight: 700;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             text-decoration: none;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
         .btn-custom-secondary:hover {
-            border-color: var(--accent-blue);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.2);
+            background: var(--accent-blue);
+            color: #000000;
             transform: translateY(-2px);
         }
 
         .footer {
             text-align: center;
-            padding: 20px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--border-color);
-            margin-top: 40px;
+            padding: 16px 16px 0 16px;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            border-top: 1px solid #1e293b;
+            margin-top: 24px;
+            line-height: 1.6;
+        }
+        .footer .author-name {
+            color: var(--accent-green);
+            font-weight: 700;
         }
 
         @media (max-width: 600px) {
-            body { padding: 12px; }
-            .header h1 { font-size: 1.4rem; }
-            .section-card { padding: 18px; }
+            body { padding: 12px 8px; }
+            .header h1 { font-size: 1.3rem; }
+            .section-card, .nav-index { padding: 15px; margin-left: 12px; margin-right: 12px; }
         }
     </style>
 </head>
@@ -886,23 +891,41 @@
             </div>
         </section>
 
-        <!-- الأزرار المحدثة بتصميم مطابق للصورة الاحترافية -->
+        <!-- الأزرار المحدثة بلون أخضر زمردي نيون وربط آمن للتطبيق -->
         <div class="actions-wrapper">
-            <a href="index.html" class="btn-custom-primary ar-only">⚡ الانتقال إلى حاسبة الطاقة الشمسية الذكية</a>
-            <a href="index.html" class="btn-custom-primary en-only">⚡ Go to Smart Solar Calculator</a>
+            <a href="index.html" onclick="return goBackToApp(event);" class="btn-custom-primary ar-only">⚡ الانتقال إلى حاسبة الطاقة الشمسية الذكية</a>
+            <a href="index.html" onclick="return goBackToApp(event);" class="btn-custom-primary en-only">⚡ Go to Smart Solar Calculator</a>
             
             <a href="manual.pdf" download class="btn-custom-secondary ar-only">📥 تحميل نسخة الدليل المطبوعة (PDF)</a>
             <a href="manual.pdf" download class="btn-custom-secondary en-only">📥 Download PDF Manual</a>
         </div>
 
         <footer class="footer">
-            <p class="ar-only">تصميم وتطوير <span style="color: var(--accent-green); font-weight: 700;">مازن العوذلي</span> © 2026</p>
-            <p class="en-only">Designed & Developed by <span style="color: var(--accent-green); font-weight: 700;">Mazen Al-Awdhali</span> © 2026</p>
+            <div class="ar-only"><span class="author-name"></span></div>
+            <div class="ar-only">جميع الحقوق محفوظة &copy; 2026 لـ حاسبة الطاقة الشمسية الذكية</div>
+
+            <div class="en-only"><span class="author-name"></span></div>
+            <div class="en-only">All Rights Reserved &copy; 2026 for Smart Solar Energy Calculator</div>
         </footer>
 
     </div>
 
     <script>
+        function goBackToApp(event) {
+            if (event) event.preventDefault();
+            try { window.close(); } catch (e) {}
+            setTimeout(function() {
+                if (!window.closed) {
+                    if (window.history.length > 1) {
+                        window.history.back();
+                    } else {
+                        window.location.href = 'index.html';
+                    }
+                }
+            }, 120);
+            return false;
+        }
+
         function applyLanguage() {
             let currentLang = localStorage.getItem('solar_app_lang') || 'ar';
             
